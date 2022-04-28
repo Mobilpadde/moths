@@ -1,6 +1,6 @@
 # moths
 
-> e**mo**ji a**ths**
+> e**mo**ji au**ths**
 
 # what
 
