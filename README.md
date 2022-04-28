@@ -34,7 +34,7 @@ A sample out-put might be `😻🙀😺🙀🙀` which would equal the `920811` 
 
 # shoutout
 
-I couldn't have done it without the lovely OSS, listed below:
+I couldn't have done it without the lovely OSS's listed below:
 
 - https://github.com/aidarkhanov/nanoid
 - https://github.com/enescakir/emoji
