@@ -1,38 +1,53 @@
 # moths
 
-> e**mo**ji au**ths**
+> e**mo**jicon au**th**entication**s**
 
-# what
+## what
 
-Emojies as TOTP
+Emojies as OTP (2FA)
 
-# why
+## why
 
-Becasue why not?
+Because why not?
 
-# how
+## how
 
-Runnig this is quite easy, just run the command:
+Runnig this is quite easy.
 
-Download the dependencies:
+- Download the dependencies
 
-```sh
-go mod download
-```
+  ```sh
+  go mod download
+  ```
 
-Next-up start the program
+- Make a secret
 
-```sh
-go run .
-```
+  ```sh
+  echo -n "MOTHS_SECRET=" > .env; echo 'moths' | sha256sum | base64 | head -c 32 >> .env
+  ```
+
+- Start the program
+
+  ```sh
+  go run .
+  ```
 
 As I said, easy-peasy!
 
-# sample
+## sample
 
-A sample out-put might be `😻🙀😺🙀🙀` which would equal the `920811` TOTP-token. Using the super secret secret specified in [`./secret.pem`](./secret.pem) - genereated at `2022/04/28 02:05:42` and a `5`-second interval.
+![four generated OTP's](./data/sample.png)
 
-# shoutout
+<details>
+  <summary>v0.1</summary>
+
+A sample out-put might be `😻🙀😺🙀🙀` which would equal the `920811` TOTP-token. Using the super secret secret of `😻` - genereated at `2022/04/28 02:05:42 AM` and a `5`-second interval.
+
+Can be checked out at [`v0.1`](https://github.com/Mobilpadde/moths/tree/v0.1)
+
+</details>
+
+## shoutout
 
 I couldn't have done it without the lovely OSS's listed below:
 

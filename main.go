@@ -1,41 +1,39 @@
 package main
 
 import (
-	"io/ioutil"
 	"log"
+	"moths/moths"
+	"os"
+	"strings"
 	"time"
-
-	"github.com/enescakir/emoji"
 )
 
 func main() {
 	log.SetFlags(log.Llongfile | log.LstdFlags)
 
-	data, err := ioutil.ReadFile("secret.pem")
-	if err != nil {
-		log.Fatalln(err)
-	}
+	go func() {
+		interval := 5
 
-	secret := string(data)
-	interval := time.Now().Unix() / 5
+		secret := os.Getenv("MOTHS_SECRET")
+		gen, err := moths.NewMoths(secret, interval)
+		if err != nil {
+			log.Fatalln(err)
+		}
 
-	otp := GetHOTPToken(secret, interval)
-	moth, err := MothsGenerator(
-		otp,
-		5,
-		emoji.GrinningCat.String(),
-		emoji.GrinningCatWithSmilingEyes.String(),
-		emoji.CatWithTearsOfJoy.String(),
-		emoji.SmilingCatWithHeartEyes.String(),
-		emoji.CatWithWrySmile.String(),
-		emoji.KissingCat.String(),
-		emoji.WearyCat.String(),
-		emoji.CryingCat.String(),
-		emoji.PoutingCat.String(),
-	)
-	if err != nil {
-		log.Fatalln(err)
-	}
+		ticker := time.NewTicker(time.Second * time.Duration(interval))
+		for {
+			select {
+			case <-ticker.C:
+				moth, err := gen.Next(6, moths.ALPHABET_CATSDOG)
+				if err != nil {
+					log.Fatalln(err)
+				}
 
-	log.Printf("moth-otp: %s => %s\n", moth, otp)
+				joint := strings.Join(strings.Split(moth, ""), " ")
+				log.Printf("moth-otp: %s\n", joint)
+			}
+		}
+	}()
+
+	select {}
 }
