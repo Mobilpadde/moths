@@ -114,8 +114,11 @@ otp, err := gen.Next()
 
 Now that you have an [`OTP`](moths/otp), you can use its functions
 
-- `Validate(code string) bool`
-  - Will validate against another token - Should become emojies in the future
+- `Validate(moth string) bool`
+  - Will validate a moth directly (the pattern of emojies)
+- `ValidateToken(code string) bool`
+  - Will validate OTP code
+  - You'll need to expose the code for your user too, for this
 - `Token() string`
   - Returns the token - for whatever reason that might be needed
 - `String() string`
@@ -130,7 +133,7 @@ Now that you have an [`OTP`](moths/otp), you can use its functions
 To validate, you'll need both the `OTP` and the generator
 
 ```go
-ok := gen.Validate(otp.Token())
+ok := gen.Validate(otp.String())
 ```
 
 ## example
@@ -144,6 +147,9 @@ Check out [`main.go`](main.go) for an example
 
 ## history ✍
 
+- [`v2.2.0`](https://github.com/Mobilpadde/moths/tree/v2.2.0) 💘
+- [`v2.1.0`](https://github.com/Mobilpadde/moths/tree/v2.1.0)
+- [`v2.0.0`](https://github.com/Mobilpadde/moths/tree/v2.0.0)
 - [`v1.0.0`](https://github.com/Mobilpadde/moths/tree/v1.0.0)
 - [`v0.1.0`](https://github.com/Mobilpadde/moths/tree/v0.1)
 
