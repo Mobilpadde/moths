@@ -31,6 +31,10 @@ func NewMoths(opts ...option) (*Moths, error) {
 		return nil, err
 	}
 
+	if err := checks.CheckAmount(m.amount); err != nil {
+		return nil, err
+	}
+
 	// check if everything is working
 	_, err := m.getToken(false)
 	return m, err
