@@ -60,7 +60,7 @@ go run .
 
 As I said, easy-peasy! 💖
 
-### Options
+### options
 
 To setup a new `moth`-generator, you must call `moths.NewMoths` as
 
@@ -98,17 +98,49 @@ There are a few options to choose from, these are
 - `WithTime(t time.Time)`
   - This will allow you to add a custom time
   - Meaning you can validate towards old `moths`
-  - ...
   - You can even add a future date ⌛
 
 Options marked with an asterix (\*) are required
+
+### generating
+
+Now that you have a sparkly new `moth`-generator, you can use it as
+
+```go
+otp, err := gen.Next()
+```
+
+Now that you have an [`OTP`](moths/otp), you can use its functions
+
+- `Validate(code string) bool`
+  - Will validate against another token - Should become emojies in the future
+- `Token() string`
+  - Returns the token - for whatever reason that might be needed
+- `String() string`
+  - Returns the `moth` as a string
+- `SpacedString() string`
+  - Returns the `moth` as a string with spaces inbetween the emojies
+- `Slice() []string`
+  - Returns the `moth` as a slice of strings
+
+### validating
+
+To validate, you'll need both the `OTP` and the generator
+
+```go
+ok := gen.Validate(otp.Token())
+```
+
+## example
+
+Check out [`main.go`](main.go) for an example
 
 ## sample 🤔
 
 ![First generation of a moth](./data/sample.png)
 ![Second generation of a moth](./data/sample2.png)
 
-## History ✍
+## history ✍
 
 - [`v1.0.0`](https://github.com/Mobilpadde/moths/tree/v1.0.0)
 - [`v0.1.0`](https://github.com/Mobilpadde/moths/tree/v0.1)
