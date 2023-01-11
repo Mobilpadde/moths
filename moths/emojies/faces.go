@@ -2,7 +2,7 @@ package emojies
 
 import "github.com/enescakir/emoji"
 
-var FACES = Emojies{
+var FACES = ToEmojies([]string{
 	emoji.PileOfPoo.String(),
 	emoji.ClownFace.String(),
 	emoji.Ogre.String(),
@@ -11,4 +11,4 @@ var FACES = Emojies{
 	emoji.Alien.String(),
 	emoji.AlienMonster.String(),
 	emoji.Robot.String(),
-}
+})

@@ -2,7 +2,7 @@ package emojies
 
 import "github.com/enescakir/emoji"
 
-var BODY_PARTS = Emojies{
+var BODY_PARTS = ToEmojies([]string{
 	emoji.FlexedBiceps.String(),
 	emoji.MechanicalArm.String(),
 	emoji.MechanicalLeg.String(),
@@ -20,4 +20,4 @@ var BODY_PARTS = Emojies{
 	emoji.Eye.String(),
 	emoji.Tongue.String(),
 	emoji.Mouth.String(),
-}
+})

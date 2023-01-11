@@ -2,7 +2,7 @@ package emojies
 
 import "github.com/enescakir/emoji"
 
-var CATS = Emojies{
+var cats = []string{
 	emoji.GrinningCat.String(),
 	emoji.GrinningCatWithSmilingEyes.String(),
 	emoji.CatWithTearsOfJoy.String(),
@@ -14,7 +14,9 @@ var CATS = Emojies{
 	emoji.PoutingCat.String(),
 }
 
-var CATS_DOG = append(
-	CATS,
+var CATS = ToEmojies(cats)
+
+var CATS_DOG = ToEmojies(append(
+	cats,
 	emoji.DogFace.String(),
-)
+))

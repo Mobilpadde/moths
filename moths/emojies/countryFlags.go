@@ -2,7 +2,7 @@ package emojies
 
 import "github.com/enescakir/emoji"
 
-var COUNTRY_FLAGS = Emojies{
+var COUNTRY_FLAGS = ToEmojies([]string{
 	emoji.FlagForAscensionIsland.String(),
 	emoji.FlagForAndorra.String(),
 	emoji.FlagForUnitedArabEmirates.String(),
@@ -261,4 +261,4 @@ var COUNTRY_FLAGS = Emojies{
 	emoji.FlagForSouthAfrica.String(),
 	emoji.FlagForZambia.String(),
 	emoji.FlagForZimbabwe.String(),
-}
+})

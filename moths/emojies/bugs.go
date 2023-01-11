@@ -3,7 +3,7 @@ package emojies
 import "github.com/enescakir/emoji"
 
 // The fly (`moths` mascot) is in there
-var BUGS = Emojies{
+var BUGS = ToEmojies([]string{
 	emoji.Snail.String(),
 	emoji.Butterfly.String(),
 	emoji.Bug.String(),
@@ -20,4 +20,4 @@ var BUGS = Emojies{
 	emoji.Fly.String(),
 	emoji.Worm.String(),
 	emoji.Microbe.String(),
-}
+})
