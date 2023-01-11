@@ -3,8 +3,8 @@ package checks
 import (
 	"time"
 
-	"moths/moths/emojies"
-	"moths/moths/errs"
+	"github.com/Mobilpadde/moths/moths/emojies"
+	"github.com/Mobilpadde/moths/moths/errs"
 )
 
 func CheckSecret(secret string) error {

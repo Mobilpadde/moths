@@ -3,7 +3,7 @@ package moths
 import (
 	"time"
 
-	"moths/moths/otp"
+	"github.com/Mobilpadde/moths/moths/otp"
 )
 
 func (m *Moths) Validate(moth string) bool {

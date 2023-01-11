@@ -1,4 +1,4 @@
-module moths
+module github.com/Mobilpadde/moths
 
 go 1.19
 

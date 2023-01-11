@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"moths/moths/checks"
-	"moths/moths/emojies"
+	"github.com/Mobilpadde/moths/moths/checks"
+	"github.com/Mobilpadde/moths/moths/emojies"
 )
 
 type Moths struct {

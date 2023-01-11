@@ -5,7 +5,7 @@ import (
 	"math/bits"
 	"strings"
 
-	"moths/moths/emojies"
+	"github.com/Mobilpadde/moths/moths/emojies"
 )
 
 const EmojiBytes = 4
