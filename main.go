@@ -14,10 +14,10 @@ func main() {
 	amount := 10
 
 	generationInterval := time.Second * 10
-	generationTicker := time.NewTicker(generationInterval).C
+	generationTicker := time.NewTicker(generationInterval)
 
-	validInterval := time.Second * 7
-	validationTicker := time.NewTicker(validInterval).C
+	validationInterval := time.Second * 7
+	validationTicker := time.NewTicker(validationInterval)
 
 	var err error
 	var gen *moths.Moths
@@ -34,7 +34,7 @@ func main() {
 	log.Printf(
 		"A new moth is generated every %s, and validation happens %s after generation",
 		generationInterval,
-		validInterval,
+		validationInterval,
 	)
 	log.Printf("Every moth is %d emoji long", amount)
 	log.Println()
@@ -46,10 +46,11 @@ func main() {
 		}
 
 		log.Printf(`Your moth is "%s" and code is %s`, otp.SpacedString(), otp.Token())
-		<-validationTicker
+		validationTicker.Reset(validationInterval)
+		<-validationTicker.C
 
-		log.Printf("Is this still valid after %s? %t", validInterval, gen.Validate(otp.Token()))
+		log.Printf("Is this still valid after %s? %t", validationInterval, gen.Validate(otp.Token()))
 		log.Println()
-		<-generationTicker
+		<-generationTicker.C
 	}
 }
