@@ -1,19 +1,37 @@
 package moths
 
-import "errors"
+import (
+	"time"
 
-func NewMoths(secret string, interval int) (*Moths, error) {
-	if len(secret) < 32 {
-		return nil, errors.New("secret must be at least 32 characters")
-	}
+	"moths/moths/checks"
+)
 
+func NewMoths(opts ...option) (*Moths, error) {
 	m := &Moths{
-		secret:   secret,
-		interval: interval,
+		interval: 0,
+		amount:   0,
+		time:     time.Now(),
 	}
 
-	if _, err := m.getHOTPToken(); err != nil {
+	for _, opt := range opts {
+		if err := opt(m); err != nil {
+			return nil, err
+		}
+	}
+
+	if err := checks.CheckSecretKey(m.secret); err != nil {
 		return nil, err
 	}
-	return m, nil
+
+	if err := checks.CheckInterval(m.interval); err != nil {
+		return nil, err
+	}
+
+	if err := checks.CheckEmojies(m.emojies); err != nil {
+		return nil, err
+	}
+
+	// check if everything is working
+	_, err := m.getToken(false)
+	return m, err
 }

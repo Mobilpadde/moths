@@ -2,38 +2,44 @@ package main
 
 import (
 	"log"
-	"moths/moths"
 	"os"
-	"strings"
 	"time"
+
+	"moths/moths"
+	"moths/moths/emojies"
 )
 
 func main() {
 	log.SetFlags(log.Llongfile | log.LstdFlags)
 
-	go func() {
-		interval := 5
+	secret := os.Getenv("MOTHS_SECRET")
+	interval := 10
+	amount := 10
 
-		secret := os.Getenv("MOTHS_SECRET")
-		gen, err := moths.NewMoths(secret, interval)
+	validInterval := time.Second * 7
+
+	var err error
+	var gen *moths.Moths
+	if gen, err = moths.NewMoths(
+		moths.WithSecret(secret),
+		moths.WithInterval(interval),
+		moths.WithAmount(amount),
+		moths.WithEmojies(emojies.DOGS),
+	); err != nil {
+		log.Fatalln(err)
+	}
+	ticker := time.NewTicker(time.Second * time.Duration(interval))
+	for {
+		otp, err := gen.Next()
 		if err != nil {
 			log.Fatalln(err)
 		}
 
-		ticker := time.NewTicker(time.Second * time.Duration(interval))
-		for {
-			select {
-			case <-ticker.C:
-				moth, err := gen.Next(6, moths.ALPHABET_CATSDOG)
-				if err != nil {
-					log.Fatalln(err)
-				}
+		log.Printf(`Your moth is "%s" and code is %s`, otp.SpacedString(), otp.Token())
 
-				joint := strings.Join(strings.Split(moth, ""), " ")
-				log.Printf("moth-otp: %s\n", joint)
-			}
-		}
-	}()
+		<-time.NewTicker(validInterval).C
+		log.Printf("Is this still valid after %s? %t", validInterval, gen.Validate(otp.Token()))
 
-	select {}
+		<-ticker.C
+	}
 }

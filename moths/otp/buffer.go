@@ -1,4 +1,4 @@
-package moths
+package otp
 
 import (
 	"encoding/binary"
@@ -6,7 +6,7 @@ import (
 	"math/rand"
 )
 
-func randomBufferFromHOTP(otp string) func(step int) ([]byte, error) {
+func bufferFromToken(otp string) func(step int) ([]byte, error) {
 	buf := []byte(fmt.Sprintf("%08s", otp))
 	seed := int64(binary.BigEndian.Uint64(buf))
 	r := rand.New(rand.NewSource(seed))
