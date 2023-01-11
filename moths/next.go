@@ -21,8 +21,9 @@ func (m *Moths) Next() (otp.OTP, error) {
 }
 
 func (m *Moths) getToken(bump bool) (string, error) {
+	// Bump the time on every run
 	if bump {
-		// Bump the time on every run
+		// TODO: Remove this and refactor to auto-update after each interval (`m.interval`) has passes
 		m.time = m.time.Add(time.Since(m.time))
 	}
 

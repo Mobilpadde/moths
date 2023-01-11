@@ -37,5 +37,7 @@ func NewMoths(opts ...option) (*Moths, error) {
 
 	// check if everything is working
 	_, err := m.getToken(false)
+
+	// go m.update()
 	return m, err
 }
