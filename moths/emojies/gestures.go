@@ -15,6 +15,9 @@ var GESTURES = ToEmojies([]string{
 	emoji.PersonShrugging.String(),
 })
 
+// IDEA: Fix?
+// Below does not work atm, as they are using "multple" emojies in one
+
 // var GESTURES_MAN = ToEmojies([]string{
 // 	emoji.ManFrowning.String(),
 // 	emoji.ManPouting.String(),

@@ -21,7 +21,7 @@ func (m *Moths) Validate(moth string) bool {
 		return false
 	}
 
-	// Bump the time for
+	// Bump the time
 	// m.getToken(true)
 	m.time = m.time.Add(time.Since(m.time))
 
