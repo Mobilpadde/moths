@@ -14,6 +14,9 @@ const (
 
 	// Interval must be at least 1s
 	interval1 string = "interval must be at least 1000ms"
+
+	// Amount must be at least 1 emoji
+	amount1 string = "interval must be at least 1 emoji"
 )
 
 var (
@@ -21,4 +24,5 @@ var (
 	ErrKey32     error = errors.New(key20)
 	ErrEmojies1  error = errors.New(emojies1)
 	ErrInterval1 error = errors.New(interval1)
+	ErrAmount1   error = errors.New(amount1)
 )

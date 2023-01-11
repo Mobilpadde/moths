@@ -50,7 +50,10 @@ func WithInterval(interval time.Duration) option {
 
 func WithAmount(amount int) option {
 	return func(m *Moths) error {
-		// TODO: Check if amount is okay (>0?)
+		if err := checks.CheckAmount(amount); err != nil {
+			return err
+		}
+
 		m.amount = amount
 		return nil
 	}

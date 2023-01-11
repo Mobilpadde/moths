@@ -38,3 +38,11 @@ func CheckInterval(interval time.Duration) error {
 
 	return nil
 }
+
+func CheckAmount(amount int) error {
+	if amount < 1 {
+		return errs.ErrAmount1
+	}
+
+	return nil
+}

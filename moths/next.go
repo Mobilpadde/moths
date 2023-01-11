@@ -17,7 +17,7 @@ func (m *Moths) Next() (otp.OTP, error) {
 		return otp.OTP{}, err
 	}
 
-	return otp.NewOTP(token, m.emojies)
+	return otp.NewOTP(token, m.amount, m.emojies)
 }
 
 func (m *Moths) getToken(bump bool) (string, error) {
