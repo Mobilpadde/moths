@@ -17,7 +17,7 @@ func CheckSecret(secret string) error {
 
 func CheckSecretKey(key []byte) error {
 	if len(key) != 20 {
-		return errs.ErrKey32
+		return errs.ErrKey20
 	}
 
 	return nil
