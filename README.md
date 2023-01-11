@@ -136,6 +136,36 @@ To validate, you'll need both the `OTP` and the generator
 ok := gen.Validate(otp.String())
 ```
 
+### emojies
+
+To use your own set of **known** emojies, you can reference the [`cat`-emojies](moths/emojies/cats.go).
+
+I've chosen the `cats.go` as it's a great reference, both for creating and re-using.
+
+If the `cats`-slice didn't exist, we could remake it as:
+
+```go
+// A slice of cat emojies and a single hotdog 🌭
+var catsHotdog = []string{
+	emoji.GrinningCat.String(),
+	emoji.GrinningCatWithSmilingEyes.String(),
+	emoji.CatWithTearsOfJoy.String(),
+	emoji.SmilingCatWithHeartEyes.String(),
+	emoji.CatWithWrySmile.String(),
+	emoji.KissingCat.String(),
+	emoji.WearyCat.String(),
+	emoji.CryingCat.String(),
+	emoji.PoutingCat.String(),
+	emoji.HotDog.String(),
+}
+
+var CATS_HOTDOG = ToEmojies(cats)
+```
+
+It doesn't even have to be from [emoji](https://github.com/enescakir/emoji),
+simply append a slice of your desired emojies, and use the [`ToEmojies`-func](moths/emojies/helper.go).
+Then provide this as an argument in `moths.WithEmojies(CATS_HOTDOG)`, when calling a new `moth`.
+
 ## example
 
 Check out [`main.go`](main.go) for an example
@@ -147,7 +177,9 @@ Check out [`main.go`](main.go) for an example
 
 ## history ✍
 
-- [`v2.2.0`](https://github.com/Mobilpadde/moths/tree/v2.2.0) 💘
+- [`v2.2.2`](https://github.com/Mobilpadde/moths/tree/v2.2.2) 💘
+- [`v2.2.1`](https://github.com/Mobilpadde/moths/tree/v2.2.1)
+- [`v2.2.0`](https://github.com/Mobilpadde/moths/tree/v2.2.0)
 - [`v2.1.0`](https://github.com/Mobilpadde/moths/tree/v2.1.0)
 - [`v2.0.0`](https://github.com/Mobilpadde/moths/tree/v2.0.0)
 - [`v1.0.0`](https://github.com/Mobilpadde/moths/tree/v1.0.0)
