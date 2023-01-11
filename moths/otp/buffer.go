@@ -16,6 +16,7 @@ func bufferFromToken(otp string) func(step int) ([]byte, error) {
 		if _, err := r.Read(buffer); err != nil {
 			return nil, err
 		}
+
 		return buffer, nil
 	}
 }
