@@ -49,7 +49,7 @@ func main() {
 		validationTicker.Reset(validationInterval)
 		<-validationTicker.C
 
-		log.Printf("Is this still valid after %s? %t", validationInterval, gen.Validate(otp.Token()))
+		log.Printf("Is this still valid after %s? %t", validationInterval, gen.Validate(otp.String()))
 		log.Println()
 		<-generationTicker.C
 	}
