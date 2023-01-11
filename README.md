@@ -2,6 +2,8 @@
 
 > e**mo**jicon au**th**entication**s**
 
+[![Go Reference](https://pkg.go.dev/badge/github.com/Mobilpadde/moths.svg)](https://pkg.go.dev/github.com/Mobilpadde/moths)
+
 ## what (is this 💩)
 
 Emojies as [TOTP](https://rublon.com/blog/hotp-totp-difference/), [because](#why).
