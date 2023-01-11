@@ -11,7 +11,7 @@ import (
 
 type Moths struct {
 	secret   []byte
-	interval int
+	interval time.Duration
 	amount   int
 	emojies  emojies.Emojies
 	time     time.Time
@@ -37,7 +37,7 @@ func WithSecret(secret string) option {
 	}
 }
 
-func WithInterval(interval int) option {
+func WithInterval(interval time.Duration) option {
 	return func(m *Moths) error {
 		if err := checks.CheckInterval(interval); err != nil {
 			return err

@@ -12,8 +12,8 @@ const (
 	// Emojies must have at least one character
 	emojies1 string = "emojies must be at least 1 character"
 
-	// Interval must be at least one
-	interval1 string = "interval must be at least 1"
+	// Interval must be at least 1s
+	interval1 string = "interval must be at least 1000ms"
 )
 
 var (

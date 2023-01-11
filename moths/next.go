@@ -27,7 +27,7 @@ func (m *Moths) getToken(bump bool) (string, error) {
 	}
 
 	b := make([]byte, 8)
-	interval := uint64(m.time.Unix() / int64(m.interval))
+	interval := uint64(m.time.Unix() / int64(m.interval.Seconds()))
 	binary.BigEndian.PutUint64(b, interval)
 
 	hash := hmac.New(sha1.New, m.secret)

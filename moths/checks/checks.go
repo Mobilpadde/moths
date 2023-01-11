@@ -1,6 +1,8 @@
 package checks
 
 import (
+	"time"
+
 	"moths/moths/emojies"
 	"moths/moths/errs"
 )
@@ -29,8 +31,8 @@ func CheckEmojies(emojies emojies.Emojies) error {
 	return nil
 }
 
-func CheckInterval(interval int) error {
-	if interval < 1 {
+func CheckInterval(interval time.Duration) error {
+	if interval.Milliseconds() < 1000 {
 		return errs.ErrInterval1
 	}
 
