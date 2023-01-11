@@ -1,19 +1,18 @@
 package emojies
 
-import (
-	"strings"
-)
+import "strings"
 
-type Emojies []string
+type Emojies []rune
 
 func (emojies Emojies) String() string {
-	return strings.Join(emojies, "")
+	return string(emojies)
 }
 
 func (emojies Emojies) SpacedString() string {
-	return strings.Join(emojies, " ")
+	return strings.Join(emojies.Slice(), " ")
 }
 
 func (emojies Emojies) Slice() []string {
-	return emojies
+	str := emojies.String()
+	return strings.Split(str, "")
 }
