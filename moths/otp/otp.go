@@ -8,11 +8,11 @@ import (
 	"moths/moths/emojies"
 )
 
-const emojiBytes = 4
+const EmojiBytes = 4
 
 func NewOTP(token string, amount int, em emojies.Emojies) (OTP, error) {
 	emojiAmount := len(em)
-	size := emojiBytes * amount
+	size := EmojiBytes * amount
 
 	// https://github.com/tilaklodha/google-authenticator
 	mask := 2<<uint32(31-bits.LeadingZeros32(uint32(emojiAmount-1|1))) - 1
