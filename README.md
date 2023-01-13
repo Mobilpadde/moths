@@ -180,12 +180,17 @@ Check out [`main.go`](main.go) for an example
 ## history ✍
 
 - [`v2.2.2`](https://github.com/Mobilpadde/moths/tree/v2.2.2) 💘
-- [`v2.2.1`](https://github.com/Mobilpadde/moths/tree/v2.2.1)
-- [`v2.2.0`](https://github.com/Mobilpadde/moths/tree/v2.2.0)
-- [`v2.1.0`](https://github.com/Mobilpadde/moths/tree/v2.1.0)
-- [`v2.0.0`](https://github.com/Mobilpadde/moths/tree/v2.0.0)
-- [`v1.0.0`](https://github.com/Mobilpadde/moths/tree/v1.0.0)
-- [`v0.1.0`](https://github.com/Mobilpadde/moths/tree/v0.1)
+
+- <details>
+    <summary>Older</summary>
+
+  - [`v2.2.1`](https://github.com/Mobilpadde/moths/tree/v2.2.1)
+  - [`v2.2.0`](https://github.com/Mobilpadde/moths/tree/v2.2.0)
+  - [`v2.1.0`](https://github.com/Mobilpadde/moths/tree/v2.1.0)
+  - [`v2.0.0`](https://github.com/Mobilpadde/moths/tree/v2.0.0)
+  - [`v1.0.0`](https://github.com/Mobilpadde/moths/tree/v1.0.0)
+  - [`v0.1.0`](https://github.com/Mobilpadde/moths/tree/v0.1)
+  </details>
 
 ## shoutout 📢💨
 
