@@ -58,6 +58,7 @@ func TestNewMothsNoAmount(t *testing.T) {
 
 	_, err := NewMoths(
 		OptionWithSecret(secret),
+		OptionWithAmount(0),
 		OptionWithInterval(time.Second),
 		OptionWithEmojies(emojies.CATS),
 	)
