@@ -10,10 +10,8 @@ import (
 )
 
 func main() {
-	// log.SetFlags(log.Flags() | log.Llongfile)
-
 	secret := os.Getenv("MOTHS_SECRET")
-	amount := 10
+	amount := 8
 
 	validationInterval := time.Second * 3
 	generationInterval := time.Second * 4
