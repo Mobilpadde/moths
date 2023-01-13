@@ -11,14 +11,14 @@ import (
 	"github.com/enescakir/emoji"
 )
 
-func TestCheckSecretOk(t *testing.T) {
+func TestCheckSecret(t *testing.T) {
 	secret := strings.Repeat("a", 32)
 	if err := CheckSecret(secret); err != nil {
 		t.Error("Expected to not return an error when checking ok secret:", err)
 	}
 }
 
-func TestCheckSecretNotOk(t *testing.T) {
+func TestCheckSecretError(t *testing.T) {
 	secret := "0"
 	err := CheckSecret(secret)
 
@@ -27,14 +27,14 @@ func TestCheckSecretNotOk(t *testing.T) {
 	}
 }
 
-func TestCheckSecretKeyOk(t *testing.T) {
+func TestCheckSecretKey(t *testing.T) {
 	secret := []byte(strings.Repeat("a", 20))
 	if err := CheckSecretKey(secret); err != nil {
 		t.Error("Expected to not return an error when checking ok secret key:", err)
 	}
 }
 
-func TestCheckSecretKeyNotOk(t *testing.T) {
+func TestCheckSecretKeyError(t *testing.T) {
 	secret := []byte{0}
 	err := CheckSecretKey(secret)
 
@@ -43,7 +43,7 @@ func TestCheckSecretKeyNotOk(t *testing.T) {
 	}
 }
 
-func TestCheckEmojiesOk(t *testing.T) {
+func TestCheckEmojies(t *testing.T) {
 	emoji := emoji.BlackCat.String()
 	emojies := emojies.ToEmojies([]string{emoji})
 
@@ -52,7 +52,7 @@ func TestCheckEmojiesOk(t *testing.T) {
 	}
 }
 
-func TestCheckEmojiesNotOk(t *testing.T) {
+func TestCheckEmojiesError(t *testing.T) {
 	emojies := emojies.ToEmojies([]string{})
 	err := CheckEmojies(emojies)
 
@@ -61,13 +61,13 @@ func TestCheckEmojiesNotOk(t *testing.T) {
 	}
 }
 
-func TestCheckIntervalOk(t *testing.T) {
+func TestCheckInterval(t *testing.T) {
 	if err := CheckInterval(time.Second); err != nil {
 		t.Error("Expected to not return an error when checking ok interval:", err)
 	}
 }
 
-func TestCheckIntervalNotOk(t *testing.T) {
+func TestCheckIntervalError(t *testing.T) {
 	err := CheckInterval(0)
 
 	if !errors.Is(err, errs.ErrInterval1) {
@@ -75,13 +75,13 @@ func TestCheckIntervalNotOk(t *testing.T) {
 	}
 }
 
-func TestCheckAmountOk(t *testing.T) {
+func TestCheckAmount(t *testing.T) {
 	if err := CheckAmount(1); err != nil {
 		t.Error("Expected to not return an error when checking ok amount", err)
 	}
 }
 
-func TestCheckAmountNotOk(t *testing.T) {
+func TestCheckAmountError(t *testing.T) {
 	err := CheckAmount(0)
 
 	if !errors.Is(err, errs.ErrAmount1) {
