@@ -199,7 +199,6 @@ Check out [`main.go`](main.go) for an example
 
 - New `sample.png`s to show changes
 - Rename `moth` to something better (`OTP` / `Token`)
-- Better naming convention of tests
 - Add better documentation
 - Rename the `gen`-variable to `otp`
   - This means renaming the [`otp`](moths/otp)-package as well?
