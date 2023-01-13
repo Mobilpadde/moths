@@ -8,7 +8,7 @@ import (
 	"github.com/Mobilpadde/moths/moths/emojies"
 )
 
-func TestNextOk(t *testing.T) {
+func TestNextAndValidate(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
@@ -28,13 +28,14 @@ func TestNextOk(t *testing.T) {
 		t.Error("Expected to not return an error when creating new OTP:", err)
 	}
 
-	correct := "158415"
-	if otp.Token() != correct {
-		t.Error("Expected token to be", correct, "not", otp.Token())
+	errStr := "Expected %s to be %s not %s"
+	correct := "😸🙀😸😻🙀😻"
+	if !gen.Validate(correct) {
+		t.Errorf(errStr, "moth", correct, otp)
 	}
 
-	correct = "🙀🙀😺😼😽😻"
-	if otp.String() != correct {
-		t.Error("Expected moth to be", correct, "not", otp.String())
+	correct = "113694"
+	if !gen.ValidateToken(correct) {
+		t.Errorf(errStr, "token", correct, otp.Token())
 	}
 }

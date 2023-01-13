@@ -10,13 +10,15 @@ import (
 )
 
 func main() {
+	// log.SetFlags(log.Flags() | log.Llongfile)
+
 	secret := os.Getenv("MOTHS_SECRET")
 	amount := 10
 
-	generationInterval := time.Second * 10
-	generationTicker := time.NewTicker(generationInterval)
+	validationInterval := time.Second * 3
+	generationInterval := time.Second * 4
 
-	validationInterval := time.Second * 7
+	generationTicker := time.NewTicker(generationInterval)
 	validationTicker := time.NewTicker(validationInterval)
 
 	var err error
@@ -26,6 +28,7 @@ func main() {
 		moths.OptionWithInterval(generationInterval),
 		moths.OptionWithAmount(amount),
 		moths.OptionWithEmojies(emojies.CATS),
+		moths.OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
 	); err != nil {
 		log.Fatalln(err)
 	}
@@ -37,20 +40,21 @@ func main() {
 		validationInterval,
 	)
 	log.Printf("Every moth is %d emoji long", amount)
-	log.Println()
 
 	for {
+		log.Println()
 		otp, err := gen.Next()
 		if err != nil {
 			log.Fatalln(err)
 		}
 
 		log.Printf(`Your moth is "%s" and code is %s`, otp.SpacedString(), otp.Token())
-		validationTicker.Reset(validationInterval)
 		<-validationTicker.C
 
 		log.Printf("Is this still valid after %s? %t", validationInterval, gen.Validate(otp.String()))
-		log.Println()
+		<-validationTicker.C
+
+		log.Printf("Is this still valid after %s? %t", validationInterval*2, gen.Validate(otp.String()))
 		<-generationTicker.C
 	}
 }

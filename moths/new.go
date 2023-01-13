@@ -9,8 +9,7 @@ import (
 func NewMoths(opts ...option) (*Moths, error) {
 	m := &Moths{
 		interval: 0,
-		amount:   0,
-		time:     time.Now(),
+		amount:   6, // Defaults to `6` as most other services uses that
 	}
 
 	for _, opt := range opts {
@@ -18,6 +17,10 @@ func NewMoths(opts ...option) (*Moths, error) {
 			return nil, err
 		}
 	}
+
+	now := time.Now().UTC()
+	m.timing.curr = now
+	m.timing.last = now.Add(-m.interval)
 
 	if err := checks.CheckSecretKey(m.secret); err != nil {
 		return nil, err
@@ -31,13 +34,10 @@ func NewMoths(opts ...option) (*Moths, error) {
 		return nil, err
 	}
 
-	if err := checks.CheckAmount(m.amount); err != nil {
+	// Checks if everything is working
+	if _, err := m.getToken(); err != nil {
 		return nil, err
 	}
 
-	// check if everything is working
-	_, err := m.getToken(true)
-
-	// go m.update()
-	return m, err
+	return m, nil
 }

@@ -10,11 +10,18 @@ import (
 )
 
 type Moths struct {
-	secret   []byte
-	interval time.Duration
-	amount   int
-	emojies  emojies.Emojies
-	time     time.Time
+	secret  []byte
+	amount  int
+	emojies emojies.Emojies
+
+	interval  time.Duration
+	lastToken string
+
+	timing struct {
+		time time.Time
+		curr time.Time
+		last time.Time
+	}
 }
 
 type option func(*Moths) error
@@ -72,7 +79,7 @@ func OptionWithEmojies(emojies emojies.Emojies) option {
 
 func OptionWithTime(t time.Time) option {
 	return func(m *Moths) error {
-		m.time = t
+		m.timing.time = t
 		return nil
 	}
 }

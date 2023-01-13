@@ -12,7 +12,7 @@ import (
 )
 
 func (m *Moths) Next() (otp.OTP, error) {
-	token, err := m.getToken(true)
+	token, err := m.getToken()
 	if err != nil {
 		return otp.OTP{}, err
 	}
@@ -20,15 +20,19 @@ func (m *Moths) Next() (otp.OTP, error) {
 	return otp.NewOTP(token, m.amount, m.emojies)
 }
 
-func (m *Moths) getToken(bump bool) (string, error) {
-	// Bump the time on every run
-	if bump {
-		// TODO: Remove this and refactor to auto-update after each interval (`m.interval`) has passes
-		m.time = m.time.Add(time.Since(m.time))
+func (m *Moths) getToken() (string, error) {
+	m.timing.curr = time.Now().UTC()
+
+	since := m.timing.curr.Sub(m.timing.last)
+	if since < m.interval {
+		return m.lastToken, nil
 	}
 
+	m.timing.last = m.timing.curr
+	m.timing.time = m.timing.time.Add(since)
+
 	b := make([]byte, 8)
-	interval := uint64(m.time.Unix() / int64(m.interval.Seconds()))
+	interval := uint64(m.timing.time.Unix() / int64(m.interval.Seconds()))
 	binary.BigEndian.PutUint64(b, interval)
 
 	hash := hmac.New(sha1.New, m.secret)
@@ -45,5 +49,8 @@ func (m *Moths) getToken(bump bool) (string, error) {
 	}
 
 	otp := (int(header) & 0x7fffffff) % 1000000
-	return fmt.Sprintf("%06d", otp), nil
+	pad := fmt.Sprintf("%06d", otp)
+
+	m.lastToken = pad
+	return pad, nil
 }
