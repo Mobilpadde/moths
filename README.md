@@ -176,8 +176,7 @@ Check out [`main.go`](main.go) for an example
 
 ## sample 🤔
 
-![First generation of a moth](./data/sample.png)
-![Second generation of a moth](./data/sample2.png)
+![Three iterations of moths](./data/sample.png)
 
 ## history ✍
 
@@ -197,7 +196,6 @@ Check out [`main.go`](main.go) for an example
 
 ## future 🔮
 
-- New `sample.png`s to show changes
 - Rename `moth` to something better (`OTP` / `Token`)
 - Add better documentation
 - Rename the `gen`-variable to `otp`
