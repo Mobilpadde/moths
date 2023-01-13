@@ -76,10 +76,10 @@ Like so
 
 ```go
 gen, err := moths.NewMoths(
-  moths.OptionWithSecret(secret),
-  moths.OptionWithInterval(generationInterval),
-  moths.OptionWithAmount(amount),
-  moths.OptionWithEmojies(emojies.CATS),
+  moths.OptionWithSecret(secret), // 32 character secret
+  moths.OptionWithInterval(time.Second), // Each is only valid for a second
+  moths.OptionWithAmount(6), // Each must is always `6` emojies
+  moths.OptionWithEmojies(emojies.CATS), // A pure slice of cats
   moths.OptionWithTime(time.Now().AddDate(10, 0, 0)), // 10 years into the future
 )
 ```
@@ -91,18 +91,20 @@ There are a few options to choose from, these are
   - Must be 32 characters ⚠
 - [`OptionWithInterval(interval time.Duration)`](moths/options.go#L47-L56)**\***
   - On which interval should a new `moth` be generated
-  - A `moth` will only be valid during this time-frame
+  - A `moth` will only be valid during this duration
 - [`OptionWithAmount(amount int)`](moths/options.go#L58-L67)
-  - The amount of emojies to generate
+  - The amount of emojies to generate in a `moth`
 - [`OptionWithEmojies(emojies emojies.Emojies)`](moths/options.go#L69-L78)**\***
   - Take a look in the [`emojies`](moths/emojies)-package to see your options
-  - You can also add new emojies
+  - You can also add your own emojies - [How to](#emojies)
 - [`OptionWithTime(t time.Time)`](moths/options.go#L80-L85)
   - This will allow you to add a custom time
   - Meaning you can validate towards old `moths`
-  - You can even add a future date ⌛
+  - You can even add future dates ⌛
 
-Options marked with an asterix (\*) are required
+> **Warning**
+>
+> Options marked with an asterix (\*) are required!
 
 ### generating
 
@@ -115,22 +117,22 @@ otp, err := gen.Next()
 Now that you have an [`OTP`](moths/otp), you can use its functions
 
 - [`Validate(moth string) bool`](moths/otp/validate.go#L3-L5)
-  - Will validate a moth directly (the pattern of emojies)
-- [`ValidateToken(code string) bool`](moths/otp/validate.go#L7-L9)
-  - Will validate OTP code
-  - You'll need to expose the code for your user too, for this
+  - Will validate a moth (pattern of emojies) directly
+- [`ValidateToken(token string) bool`](moths/otp/validate.go#L7-L9)
+  - Will validate a OTP token
+  - You'll need to expose the code for your user too, for this - not recommended
 - [`Token() string`](moths/otp/config.go#L12-L14)
   - Returns the token - for whatever reason that might be needed
 - [`String() string`](moths/otp/config.go#L16-L18)
   - Returns the `moth` as a string
 - [`SpacedString() string`](moths/otp/config.go#L20-L22)
-  - Returns the `moth` as a string with spaces inbetween the emojies
+  - Returns the `moth` as a string with spaces inbetween
 - [`Slice() []string`](moths/otp/config.go#L24-L26)
   - Returns the `moth` as a slice of strings
 
 ### validating
 
-To validate, you'll need both the `OTP` and the generator
+To validate, you'll need both the `moth` (or the `token`) and the generator
 
 ```go
 token := otp.String() // Ideally you'd get this from the user
@@ -143,7 +145,7 @@ To use your own set of **known** emojies, you can reference the [`cat`-emojies](
 
 I've chosen the `cats` as it's a great reference, both for creating and re-using.
 
-If the `cats`-slice didn't exist, we could remake it as:
+If we would like to add an easter-egg to a pure bred slice of cats, we could do it like:
 
 ```go
 // A slice of cat emojies and a single hotdog 🌭
@@ -161,12 +163,12 @@ var catsHotdog = []string{
 	emoji.HotDog.String(),
 }
 
-var CATS_HOTDOG = ToEmojies(cats)
+var CATS_HOTDOG = ToEmojies(catsHotdog)
 ```
 
-It doesn't even have to be from [emoji](https://github.com/enescakir/emoji),
-simply append a slice of your desired emojies, and use the [`ToEmojies`-func](moths/emojies/helper.go#L5-L19).
-Then provide this as an argument in `moths.WithEmojies(CATS_HOTDOG)`, when calling a new `moth`.
+It doesn't even have to be from the [emoji](https://github.com/enescakir/emoji)-package,
+simply make a slice of your desired emojies, and use the [`ToEmojies`-func](moths/emojies/helper.go#L5-L19).
+Then provide this as an argument in `moths.OptionWithEmojies(CATS_HOTDOG)` when calling the `moths.NewMoths()`.
 
 ## example
 
@@ -179,11 +181,12 @@ Check out [`main.go`](main.go) for an example
 
 ## history ✍
 
-- [`v2.2.2`](https://github.com/Mobilpadde/moths/tree/v2.2.2) 💘
+- [`v3.0.0`](https://github.com/Mobilpadde/moths/tree/v3.0.0) 💘
 
 - <details>
     <summary>Older</summary>
 
+  - [`v2.2.2`](https://github.com/Mobilpadde/moths/tree/v2.2.2)
   - [`v2.2.1`](https://github.com/Mobilpadde/moths/tree/v2.2.1)
   - [`v2.2.0`](https://github.com/Mobilpadde/moths/tree/v2.2.0)
   - [`v2.1.0`](https://github.com/Mobilpadde/moths/tree/v2.1.0)
@@ -194,13 +197,12 @@ Check out [`main.go`](main.go) for an example
 
 ## future 🔮
 
-- Always bump the time of `Next()` and `Validate*()`
-- Add a way to validate old tokens
-  - E.g. by passing a timestamp and parse it
+- Expose **all** emojies
+- Rename `moth` to something better (`OTP` / `Token`)
 - Better naming convention of tests
 - Add better documentation
-- Rename `gen`-variable to `otp`(?)
-  - This means renaming the [`otp`](moths/otp)-package to not override it(?)
+- Rename the `gen`-variable to `otp`
+  - This means renaming the [`otp`](moths/otp)-package as well?
 - Make a fiber version
 - Get [pkg.go.dev](https://pkg.go.dev/github.com/Mobilpadde/moths) up-to-date
 
