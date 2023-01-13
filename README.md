@@ -6,9 +6,9 @@
 
 ## what (is this 💩)
 
-Emojies as [TOTP](https://rublon.com/blog/hotp-totp-difference/), [because](#why).
+Emojies as [TOTP](https://rublon.com/blog/hotp-totp-difference/), [because](#why-).
 
-## why
+## why 🥲
 
 We _all_ **could** use a little more emotion in our lives 🤗 Go show the world how you really feel!
 
@@ -33,7 +33,7 @@ So whether your mascot is:
 
 Show that sparkly emojies ✨
 
-## how
+## how 🧑‍💼
 
 Running this is quite easy 💨
 
@@ -62,7 +62,7 @@ go run .
 
 As I said, easy-peasy! 💖
 
-### options
+### options 👓
 
 To setup a new `moth`-generator, you must call [`moths.NewMoths`](moths/new.go#L9-L43) as
 
@@ -96,7 +96,7 @@ There are a few options to choose from, these are
   - The amount of emojies to generate in a `moth`
 - [`OptionWithEmojies(emojies emojies.Emojies)`](moths/options.go#L69-L78)**\***
   - Take a look in the [`emojies`](moths/emojies)-package to see your options
-  - You can also add your own emojies - [How to](#emojies)
+  - You can also add your own emojies - [How to](#emojies-)
 - [`OptionWithTime(t time.Time)`](moths/options.go#L80-L85)
   - This will allow you to add a custom time
   - Meaning you can validate towards old `moths`
@@ -106,7 +106,7 @@ There are a few options to choose from, these are
 >
 > Options marked with an asterix (\*) are required!
 
-### generating
+### generating 🖇
 
 Now that you have a sparkly new `moth`-generator, you can use it as
 
@@ -130,7 +130,7 @@ Now that you have an [`OTP`](moths/otp), you can use its functions
 - [`Slice() []string`](moths/otp/config.go#L24-L26)
   - Returns the `moth` as a slice of strings
 
-### validating
+### validating 🧑‍🔬
 
 To validate, you'll need both the `moth` (or the `token`) and the generator
 
@@ -139,7 +139,7 @@ token := otp.String() // Ideally you'd get this from the user
 ok := gen.Validate(token)
 ```
 
-### emojies
+### emojies 😻
 
 To use your own set of **known** emojies, you can reference the [`cat`-emojies](moths/emojies/cats.go).
 
@@ -170,11 +170,11 @@ It doesn't even have to be from the [emoji](https://github.com/enescakir/emoji)-
 simply make a slice of your desired emojies, and use the [`ToEmojies`-func](moths/emojies/helper.go#L5-L19).
 Then provide this as an argument in `moths.OptionWithEmojies(CATS_HOTDOG)` when calling the `moths.NewMoths()`.
 
-## example
+## example 🤷
 
 Check out [`main.go`](main.go) for an example
 
-## sample 🤔
+## show-case 🕺
 
 ![Three iterations of moths](./data/sample.png)
 
