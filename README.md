@@ -86,18 +86,18 @@ gen, err := moths.NewMoths(
 
 There are a few options to choose from, these are
 
-- [`OptionWithSecret(secret string)`](moths/options.go#L22-L38)**\***
+- [`OptionWithSecret(secret string)`](moths/options.go#L29-L45)**\***
   - The secret to generate from
   - Must be 32 characters ⚠
-- [`OptionWithInterval(interval time.Duration)`](moths/options.go#L40-L49)**\***
+- [`OptionWithInterval(interval time.Duration)`](moths/options.go#L47-L56)**\***
   - On which interval should a new `moth` be generated
   - A `moth` will only be valid during this time-frame
-- [`OptionWithAmount(amount int)`](moths/options.go#L51-L60)**\***
+- [`OptionWithAmount(amount int)`](moths/options.go#L58-L67)
   - The amount of emojies to generate
-- [`OptionWithEmojies(emojies emojies.Emojies)`](moths/options.go#L62-L71)**\***
+- [`OptionWithEmojies(emojies emojies.Emojies)`](moths/options.go#L69-L78)**\***
   - Take a look in the [`emojies`](moths/emojies)-package to see your options
   - You can also add new emojies
-- [`OptionWithTime(t time.Time)`](moths/options.go#L-L)
+- [`OptionWithTime(t time.Time)`](moths/options.go#L80-L85)
   - This will allow you to add a custom time
   - Meaning you can validate towards old `moths`
   - You can even add a future date ⌛
@@ -191,6 +191,18 @@ Check out [`main.go`](main.go) for an example
   - [`v1.0.0`](https://github.com/Mobilpadde/moths/tree/v1.0.0)
   - [`v0.1.0`](https://github.com/Mobilpadde/moths/tree/v0.1)
   </details>
+
+## future 🔮
+
+- Always bump the time of `Next()` and `Validate*()`
+- Add a way to validate old tokens
+  - E.g. by passing a timestamp and parse it
+- Better naming convention of tests
+- Add better documentation
+- Rename `gen`-variable to `otp`(?)
+  - This means renaming the [`otp`](moths/otp)-package to not override it(?)
+- Make a fiber version
+- Get [pkg.go.dev](https://pkg.go.dev/github.com/Mobilpadde/moths) up-to-date
 
 ## shoutout 📢💨
 
