@@ -197,6 +197,7 @@ Check out [`main.go`](main.go) for an example
 
 ## future 🔮
 
+- New `sample.png`s to show changes
 - Expose **all** emojies
 - Rename `moth` to something better (`OTP` / `Token`)
 - Better naming convention of tests
