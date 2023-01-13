@@ -64,7 +64,7 @@ As I said, easy-peasy! 💖
 
 ### options
 
-To setup a new `moth`-generator, you must call `moths.NewMoths` as
+To setup a new `moth`-generator, you must call [`moths.NewMoths`](moths/new.go#L9-L43) as
 
 ```go
 gen, err := moths.NewMoths()
@@ -76,28 +76,28 @@ Like so
 
 ```go
 gen, err := moths.NewMoths(
-  moths.WithSecret(secret),
-  moths.WithInterval(generationInterval),
-  moths.WithAmount(amount),
-  moths.WithEmojies(emojies.CATS),
-  moths.WithTime(time.Now().AddDate(10, 0, 0)), // 10 years into the future
+  moths.OptionWithSecret(secret),
+  moths.OptionWithInterval(generationInterval),
+  moths.OptionWithAmount(amount),
+  moths.OptionWithEmojies(emojies.CATS),
+  moths.OptionWithTime(time.Now().AddDate(10, 0, 0)), // 10 years into the future
 )
 ```
 
 There are a few options to choose from, these are
 
-- `WithSecret(secret string)`**\***
+- [`OptionWithSecret(secret string)`](moths/options.go#L22-L38)**\***
   - The secret to generate from
   - Must be 32 characters ⚠
-- `WithInterval(interval time.Duration)`**\***
+- [`OptionWithInterval(interval time.Duration)`](moths/options.go#L40-L49)**\***
   - On which interval should a new `moth` be generated
   - A `moth` will only be valid during this time-frame
-- `WithAmount(amount int)`**\***
+- [`OptionWithAmount(amount int)`](moths/options.go#L51-L60)**\***
   - The amount of emojies to generate
-- `WithEmojies(emojies emojies.Emojies)`**\***
+- [`OptionWithEmojies(emojies emojies.Emojies)`](moths/options.go#L62-L71)**\***
   - Take a look in the [`emojies`](moths/emojies)-package to see your options
   - You can also add new emojies
-- `WithTime(t time.Time)`
+- [`OptionWithTime(t time.Time)`](moths/options.go#L-L)
   - This will allow you to add a custom time
   - Meaning you can validate towards old `moths`
   - You can even add a future date ⌛
@@ -114,18 +114,18 @@ otp, err := gen.Next()
 
 Now that you have an [`OTP`](moths/otp), you can use its functions
 
-- `Validate(moth string) bool`
+- [`Validate(moth string) bool`](moths/otp/validate.go#L3-L5)
   - Will validate a moth directly (the pattern of emojies)
-- `ValidateToken(code string) bool`
+- [`ValidateToken(code string) bool`](moths/otp/validate.go#L7-L9)
   - Will validate OTP code
   - You'll need to expose the code for your user too, for this
-- `Token() string`
+- [`Token() string`](moths/otp/config.go#L12-L14)
   - Returns the token - for whatever reason that might be needed
-- `String() string`
+- [`String() string`](moths/otp/config.go#L16-L18)
   - Returns the `moth` as a string
-- `SpacedString() string`
+- [`SpacedString() string`](moths/otp/config.go#L20-L22)
   - Returns the `moth` as a string with spaces inbetween the emojies
-- `Slice() []string`
+- [`Slice() []string`](moths/otp/config.go#L24-L26)
   - Returns the `moth` as a slice of strings
 
 ### validating
@@ -133,14 +133,15 @@ Now that you have an [`OTP`](moths/otp), you can use its functions
 To validate, you'll need both the `OTP` and the generator
 
 ```go
-ok := gen.Validate(otp.String())
+token := otp.String() // Ideally you'd get this from the user
+ok := gen.Validate(token)
 ```
 
 ### emojies
 
 To use your own set of **known** emojies, you can reference the [`cat`-emojies](moths/emojies/cats.go).
 
-I've chosen the `cats.go` as it's a great reference, both for creating and re-using.
+I've chosen the `cats` as it's a great reference, both for creating and re-using.
 
 If the `cats`-slice didn't exist, we could remake it as:
 
@@ -156,6 +157,7 @@ var catsHotdog = []string{
 	emoji.WearyCat.String(),
 	emoji.CryingCat.String(),
 	emoji.PoutingCat.String(),
+
 	emoji.HotDog.String(),
 }
 
@@ -163,7 +165,7 @@ var CATS_HOTDOG = ToEmojies(cats)
 ```
 
 It doesn't even have to be from [emoji](https://github.com/enescakir/emoji),
-simply append a slice of your desired emojies, and use the [`ToEmojies`-func](moths/emojies/helper.go).
+simply append a slice of your desired emojies, and use the [`ToEmojies`-func](moths/emojies/helper.go#L5-L19).
 Then provide this as an argument in `moths.WithEmojies(CATS_HOTDOG)`, when calling a new `moth`.
 
 ## example
