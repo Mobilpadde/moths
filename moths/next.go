@@ -1,11 +1,11 @@
 package moths
 
 import (
-	"bytes"
 	"crypto/hmac"
 	"crypto/sha1"
 	"encoding/binary"
 	"fmt"
+	"math"
 	"time"
 
 	"github.com/Mobilpadde/moths/moths/otp"
@@ -31,26 +31,28 @@ func (m *Moths) getToken() (string, error) {
 	m.timing.last = m.timing.curr
 	m.timing.time = m.timing.time.Add(since)
 
-	b := make([]byte, 8)
 	interval := uint64(m.timing.time.Unix() / int64(m.interval.Seconds()))
-	binary.BigEndian.PutUint64(b, interval)
 
-	hash := hmac.New(sha1.New, m.secret)
-	hash.Write(b)
-	h := hash.Sum(nil)
+	// https://github.com/pquerna/otp/blob/master/hotp/hotp.go#L95-L123
+	buf := make([]byte, 80)
+	h := hmac.New(sha1.New, m.secret)
+	binary.BigEndian.PutUint64(buf, interval)
 
-	o := (h[19] & 15)
-	r := bytes.NewReader(h[o : o+4])
+	h.Write(buf)
+	sum := h.Sum(nil)
 
-	var header uint32
-	err := binary.Read(r, binary.BigEndian, &header)
-	if err != nil {
-		return "", err
-	}
+	// "Dynamic truncation" in RFC 4226
+	// http://tools.ietf.org/html/rfc4226#section-5.4
+	offset := sum[len(sum)-1] & 0xf
+	value := int64(((int(sum[offset]) & 0x7f) << 24) |
+		((int(sum[offset+1] & 0xff)) << 16) |
+		((int(sum[offset+2] & 0xff)) << 8) |
+		(int(sum[offset+3]) & 0xff))
 
-	otp := (int(header) & 0x7fffffff) % 1000000
-	pad := fmt.Sprintf("%06d", otp)
+	f := fmt.Sprintf("%%0%dd", m.amount)
+	mod := int32(value % int64(math.Pow10(m.amount)))
 
-	m.lastToken = pad
-	return pad, nil
+	token := fmt.Sprintf(f, mod)
+	m.lastToken = token
+	return token, nil
 }
