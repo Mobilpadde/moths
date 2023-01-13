@@ -10,9 +10,9 @@ Emojies as [TOTP](https://rublon.com/blog/hotp-totp-difference/), [because](#why
 
 ## why
 
-Because we _all_ **could** use a little more emotion in our lives 🤗 Go show the world how you really feel!
+We _all_ **could** use a little more emotion in our lives 🤗 Go show the world how you really feel!
 
-It's a great companion for any app that uses 2FA - as every app should! Make your app's 2FA users as star-striking as your app! 🤩
+It's a great companion for any app that uses 2FA - as every app should! Make your app's 2FA as star-striking as your app! 🤩
 
 So whether your mascot is:
 
