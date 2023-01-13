@@ -19,7 +19,7 @@ type Moths struct {
 
 type option func(*Moths) error
 
-func WithSecret(secret string) option {
+func OptionWithSecret(secret string) option {
 	return func(m *Moths) error {
 		if err := checks.CheckSecret(secret); err != nil {
 			return err
@@ -37,7 +37,7 @@ func WithSecret(secret string) option {
 	}
 }
 
-func WithInterval(interval time.Duration) option {
+func OptionWithInterval(interval time.Duration) option {
 	return func(m *Moths) error {
 		if err := checks.CheckInterval(interval); err != nil {
 			return err
@@ -48,7 +48,7 @@ func WithInterval(interval time.Duration) option {
 	}
 }
 
-func WithAmount(amount int) option {
+func OptionWithAmount(amount int) option {
 	return func(m *Moths) error {
 		if err := checks.CheckAmount(amount); err != nil {
 			return err
@@ -59,7 +59,7 @@ func WithAmount(amount int) option {
 	}
 }
 
-func WithEmojies(emojies emojies.Emojies) option {
+func OptionWithEmojies(emojies emojies.Emojies) option {
 	return func(m *Moths) error {
 		if err := checks.CheckEmojies(emojies); err != nil {
 			return err
@@ -70,7 +70,7 @@ func WithEmojies(emojies emojies.Emojies) option {
 	}
 }
 
-func WithTime(t time.Time) option {
+func OptionWithTime(t time.Time) option {
 	return func(m *Moths) error {
 		m.time = t
 		return nil

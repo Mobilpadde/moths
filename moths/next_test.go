@@ -13,11 +13,11 @@ func TestNextOk(t *testing.T) {
 	secret := strings.Repeat("a", 32)
 
 	gen, err := NewMoths(
-		WithSecret(secret),
-		WithInterval(time.Second),
-		WithAmount(amount),
-		WithEmojies(emojies.CATS),
-		WithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
+		OptionWithSecret(secret),
+		OptionWithInterval(time.Second),
+		OptionWithAmount(amount),
+		OptionWithEmojies(emojies.CATS),
+		OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
 	)
 	if err != nil {
 		t.Error("Expected to not return an error when creating new Moths:", err)

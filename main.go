@@ -22,10 +22,10 @@ func main() {
 	var err error
 	var gen *moths.Moths
 	if gen, err = moths.NewMoths(
-		moths.WithSecret(secret),
-		moths.WithInterval(generationInterval),
-		moths.WithAmount(amount),
-		moths.WithEmojies(emojies.CATS),
+		moths.OptionWithSecret(secret),
+		moths.OptionWithInterval(generationInterval),
+		moths.OptionWithAmount(amount),
+		moths.OptionWithEmojies(emojies.CATS),
 	); err != nil {
 		log.Fatalln(err)
 	}

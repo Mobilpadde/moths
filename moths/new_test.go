@@ -15,10 +15,10 @@ func TestNewMoths(t *testing.T) {
 	secret := strings.Repeat("a", 32)
 
 	if _, err := NewMoths(
-		WithSecret(secret),
-		WithInterval(time.Second),
-		WithAmount(amount),
-		WithEmojies(emojies.CATS),
+		OptionWithSecret(secret),
+		OptionWithInterval(time.Second),
+		OptionWithAmount(amount),
+		OptionWithEmojies(emojies.CATS),
 	); err != nil {
 		t.Error("Expected to not return an error when creating new Moths:", err)
 	}
@@ -28,9 +28,9 @@ func TestNewMothsNoSecret(t *testing.T) {
 	amount := 6
 
 	_, err := NewMoths(
-		WithInterval(time.Second),
-		WithAmount(amount),
-		WithEmojies(emojies.CATS),
+		OptionWithInterval(time.Second),
+		OptionWithAmount(amount),
+		OptionWithEmojies(emojies.CATS),
 	)
 
 	if !errors.Is(err, errs.ErrKey20) {
@@ -43,9 +43,9 @@ func TestNewMothsNoInterval(t *testing.T) {
 	secret := strings.Repeat("a", 32)
 
 	_, err := NewMoths(
-		WithSecret(secret),
-		WithAmount(amount),
-		WithEmojies(emojies.CATS),
+		OptionWithSecret(secret),
+		OptionWithAmount(amount),
+		OptionWithEmojies(emojies.CATS),
 	)
 
 	if !errors.Is(err, errs.ErrInterval1) {
@@ -57,9 +57,9 @@ func TestNewMothsNoAmount(t *testing.T) {
 	secret := strings.Repeat("a", 32)
 
 	_, err := NewMoths(
-		WithSecret(secret),
-		WithInterval(time.Second),
-		WithEmojies(emojies.CATS),
+		OptionWithSecret(secret),
+		OptionWithInterval(time.Second),
+		OptionWithEmojies(emojies.CATS),
 	)
 
 	if !errors.Is(err, errs.ErrAmount1) {
@@ -72,9 +72,9 @@ func TestNewMothsNoEmojies(t *testing.T) {
 	secret := strings.Repeat("a", 32)
 
 	_, err := NewMoths(
-		WithSecret(secret),
-		WithInterval(time.Second),
-		WithAmount(amount),
+		OptionWithSecret(secret),
+		OptionWithInterval(time.Second),
+		OptionWithAmount(amount),
 	)
 
 	if !errors.Is(err, errs.ErrEmojies1) {
