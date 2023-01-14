@@ -1,14 +1,18 @@
 package otp
 
 import (
-	"encoding/binary"
-	"fmt"
 	"math/rand"
+	"strconv"
 )
 
-func bufferFromToken(otp string) func(step int) ([]byte, error) {
-	buf := []byte(fmt.Sprintf("%08s", otp))
-	seed := int64(binary.BigEndian.Uint64(buf))
+func bufferFromToken(token string) func(step int) ([]byte, error) {
+	// // Does not support any more than a 15-characters
+	// buf := []byte(token)
+	// seed := int64(binary.LittleEndian.Uint64(buf))
+
+	// Works for longer tokens
+	seed, _ := strconv.ParseInt(token, 10, 64)
+
 	r := rand.New(rand.NewSource(seed))
 
 	return func(step int) ([]byte, error) {
