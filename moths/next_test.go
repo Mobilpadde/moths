@@ -29,12 +29,12 @@ func TestNextAndValidate(t *testing.T) {
 	}
 
 	errStr := "Expected %s to be %s not %s"
-	correct := "😼😻😿😹😾🙀"
+	correct := "😸🙀😸😻🙀😻"
 	if !gen.Validate(correct) {
 		t.Errorf(errStr, "moth", correct, otp)
 	}
 
-	correct = "434713"
+	correct = "113694"
 	if !gen.ValidateToken(correct) {
 		t.Errorf(errStr, "token", correct, otp.Token())
 	}

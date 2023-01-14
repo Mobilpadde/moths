@@ -34,7 +34,7 @@ func (m *Moths) getToken() (string, error) {
 	interval := uint64(m.timing.time.Unix() / int64(m.interval.Seconds()))
 
 	// https://github.com/pquerna/otp/blob/master/hotp/hotp.go#L95-L123
-	buf := make([]byte, 80)
+	buf := make([]byte, 8)
 	h := hmac.New(sha1.New, m.secret)
 	binary.BigEndian.PutUint64(buf, interval)
 
