@@ -51,7 +51,7 @@ go mod download
 
 > **Warning**
 >
-> This is just an one-liner to write the `base64`-encoded `moths`-string into `.env`.
+> This is just an one-liner to write the `base64`-encoded `sha256` of `moths` into `.env`.
 > Make sure to use something better 🤷
 
 ```sh
