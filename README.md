@@ -49,9 +49,13 @@ go mod download
 
 1. Make a secret of **32** characters 🔐
 
+> **Warning**
+>
+> This is just an one-liner to write the `base64`-encoded `moths`-string into `.env`.
+> Make sure to use something better 🤷
+
 ```sh
-echo -n "MOTHS_SECRET=" > .env
-echo 'moths' | sha256sum | base64 | head -c 32 >> .env
+echo 'moths' | sha256sum | base64 | head -c 32 | { echo -n "MOTHS_SECRET=$(cat -)" } > .env
 ```
 
 2. Run the program 🏃
