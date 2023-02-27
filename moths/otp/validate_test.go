@@ -9,7 +9,7 @@ import (
 func TestValidate(t *testing.T) {
 	amount := 6
 	token := "000000"
-	correct := "😺😺😽😹😻🙀"
+	correct := "😸😼😹😺😸😻"
 
 	otp, err := NewOTP(token, amount, emojies.CATS)
 	if err != nil {
@@ -17,7 +17,7 @@ func TestValidate(t *testing.T) {
 	}
 
 	if !otp.Validate(correct) {
-		t.Error("Expected moth to be", correct, "not", otp.emojies)
+		t.Error("Expected code to be", correct, "not", otp.emojies)
 	}
 }
 
@@ -31,6 +31,6 @@ func TestValidateToken(t *testing.T) {
 	}
 
 	if !otp.ValidateToken(token) {
-		t.Error("Expected moth to be", token, "not", otp.token)
+		t.Error("Expected code to be", token, "not", otp.token)
 	}
 }

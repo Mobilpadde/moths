@@ -9,7 +9,7 @@ import (
 func TestNewOTP(t *testing.T) {
 	amount := 6
 	token := "000000"
-	correct := "😺😺😽😹😻🙀"
+	correct := "😸😼😹😺😸😻"
 
 	otp, err := NewOTP(token, amount, emojies.CATS)
 	if err != nil {
@@ -21,6 +21,6 @@ func TestNewOTP(t *testing.T) {
 	}
 
 	if otp.emojies.String() != correct {
-		t.Error("Expected moth to be", correct, "not", otp.emojies)
+		t.Error("Expected code to be", correct, "not", otp.emojies)
 	}
 }
