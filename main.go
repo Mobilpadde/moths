@@ -33,11 +33,11 @@ func main() {
 
 	log.Printf("Setup with validation complete")
 	log.Printf(
-		"A new moth is generated every %s, and validation happens %s after generation",
+		"A new code is generated every %s, and validation happens %s after generation",
 		generationInterval,
 		validationInterval,
 	)
-	log.Printf("Every moth is %d emoji long", amount)
+	log.Printf("Every code is %d emoji long", amount)
 
 	for {
 		log.Println()
@@ -46,7 +46,7 @@ func main() {
 			log.Fatalln(err)
 		}
 
-		log.Printf(`Your moth is "%s" and code is %s`, otp.SpacedString(), otp.Token())
+		log.Printf(`Your code is "%s" and code is %s`, otp.SpacedString(), otp.Token())
 		<-validationTicker.C
 
 		log.Printf("Is this still valid after %s? %t", validationInterval, gen.Validate(otp.String()))

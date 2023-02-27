@@ -14,8 +14,8 @@ func NewOTP(token string, amount int, em emojies.Emojies) (OTP, error) {
 	emojiAmount := len(em)
 	size := EmojiBytes * amount
 
-	moth := new(strings.Builder)
-	moth.Grow(size)
+	code := strings.Builder{}
+	code.Grow(size)
 	buffer := bufferFromToken(token)
 
 	// https://github.com/tilaklodha/google-authenticator
@@ -33,20 +33,20 @@ loop:
 			currentIndex := int(randomBuffer[i]) & mask
 
 			if currentIndex < emojiAmount {
-				if _, err := moth.WriteRune(em[currentIndex]); err != nil {
+				if _, err := code.WriteRune(em[currentIndex]); err != nil {
 					return OTP{}, err
-				} else if moth.Len() == size {
+				} else if code.Len() == size {
 					break loop
 				}
 
-				if moth.Len() > size {
-					moth.Reset()
+				if code.Len() > size {
+					code.Reset()
 				}
 			}
 		}
 	}
 
-	split := strings.Split(moth.String(), "")
+	split := strings.Split(code.String(), "")
 	return OTP{
 		token:   token,
 		emojies: emojies.ToEmojies(split),

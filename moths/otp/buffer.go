@@ -12,7 +12,6 @@ func bufferFromToken(token string) func(step int) ([]byte, error) {
 
 	// Works for longer tokens
 	seed, _ := strconv.ParseInt(token, 10, 64)
-
 	r := rand.New(rand.NewSource(seed))
 
 	return func(step int) ([]byte, error) {
