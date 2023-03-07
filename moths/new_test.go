@@ -28,12 +28,13 @@ func TestNewMothsNoSecret(t *testing.T) {
 	amount := 6
 
 	_, err := NewMoths(
+		OptionWithSecret(""),
 		OptionWithInterval(time.Second),
 		OptionWithAmount(amount),
 		OptionWithEmojies(emojies.CATS),
 	)
 
-	if !errors.Is(err, errs.ErrKey20) {
+	if !errors.Is(err, errs.ErrSecretLength) {
 		t.Error("Expected to return an error when creating new Moths without a secret:", err)
 	}
 }
