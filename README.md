@@ -190,11 +190,12 @@ Check out [`main.go`](main.go) for an example
 
 ## history ✍
 
-- [`v3.0.0`](https://github.com/Mobilpadde/moths/tree/v3.0.0) 💘
+- [`v3.0.0`](https://github.com/Mobilpadde/moths/tree/v4.0.0) 💘
 
 - <details>
     <summary>Older</summary>
 
+  - [`v3.0.0`](https://github.com/Mobilpadde/moths/tree/v3.0.0)
   - [`v2.2.2`](https://github.com/Mobilpadde/moths/tree/v2.2.2)
   - [`v2.2.1`](https://github.com/Mobilpadde/moths/tree/v2.2.1)
   - [`v2.2.0`](https://github.com/Mobilpadde/moths/tree/v2.2.0)
@@ -207,10 +208,9 @@ Check out [`main.go`](main.go) for an example
 ## future 🔮
 
 - Rename `moth` to something better (`OTP` / `Token`)
-- Add better documentation
+- Add better documentation 🫢
 - Rename the `gen`-variable to `otp`
   - This means renaming the [`otp`](moths/otp)-package as well?
-- Make a fiber version
 - Get [pkg.go.dev](https://pkg.go.dev/github.com/Mobilpadde/moths) up-to-date
 
 ## shoutout 📢💨
