@@ -5,8 +5,8 @@ import (
 	"os"
 	"time"
 
-	"github.com/Mobilpadde/moths/moths"
-	"github.com/Mobilpadde/moths/moths/emojies"
+	"github.com/Mobilpadde/moths/v4/moths"
+	"github.com/Mobilpadde/moths/v4/moths/emojies"
 )
 
 func main() {

@@ -4,8 +4,8 @@ import (
 	"encoding/base64"
 	"time"
 
-	"github.com/Mobilpadde/moths/moths/checks"
-	"github.com/Mobilpadde/moths/moths/emojies"
+	"github.com/Mobilpadde/moths/v4/moths/checks"
+	"github.com/Mobilpadde/moths/v4/moths/emojies"
 )
 
 type Moths struct {

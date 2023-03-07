@@ -3,7 +3,7 @@ package moths
 import (
 	"time"
 
-	"github.com/Mobilpadde/moths/moths/checks"
+	"github.com/Mobilpadde/moths/v4/moths/checks"
 )
 
 func NewMoths(opts ...option) (*Moths, error) {

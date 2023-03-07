@@ -8,7 +8,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/Mobilpadde/moths/moths/otp"
+	"github.com/Mobilpadde/moths/v4/moths/otp"
 )
 
 func (m *Moths) Next() (otp.OTP, error) {

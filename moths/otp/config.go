@@ -1,7 +1,7 @@
 package otp
 
 import (
-	"github.com/Mobilpadde/moths/moths/emojies"
+	"github.com/Mobilpadde/moths/v4/moths/emojies"
 )
 
 type OTP struct {

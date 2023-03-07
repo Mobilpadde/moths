@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Mobilpadde/moths/moths/emojies"
-	"github.com/Mobilpadde/moths/moths/errs"
+	"github.com/Mobilpadde/moths/v4/moths/emojies"
+	"github.com/Mobilpadde/moths/v4/moths/errs"
 )
 
 func TestNewMoths(t *testing.T) {

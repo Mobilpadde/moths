@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Mobilpadde/moths/moths/emojies"
+	"github.com/Mobilpadde/moths/v4/moths/emojies"
 )
 
 func TestNextAndValidate(t *testing.T) {
