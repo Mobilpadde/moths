@@ -20,22 +20,22 @@ func TestNextAndValidate(t *testing.T) {
 		OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
 	)
 	if err != nil {
-		t.Error("Expected to not return an error when creating new Moths:", err)
+		t.Error("Expected to not return an error when creating new generator:", err)
 	}
 
-	otp, err := gen.Next()
+	code, err := gen.Next()
 	if err != nil {
-		t.Error("Expected to not return an error when creating new OTP:", err)
+		t.Error("Expected to not return an error when creating new code:", err)
 	}
 
 	errStr := "Expected %s to be %s not %s"
 	correct := "🙀😾😹🙀😼😹"
 	if !gen.Validate(correct) {
-		t.Errorf(errStr, "code", correct, otp)
+		t.Errorf(errStr, "code", correct, code)
 	}
 
 	correct = "187603"
 	if !gen.ValidateToken(correct) {
-		t.Errorf(errStr, "token", correct, otp.Token())
+		t.Errorf(errStr, "token", correct, code.Token())
 	}
 }

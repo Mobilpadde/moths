@@ -10,7 +10,7 @@ import (
 	"github.com/Mobilpadde/moths/v4/token/errs"
 )
 
-func TestNewMoths(t *testing.T) {
+func TestNewGenerator(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
@@ -20,11 +20,11 @@ func TestNewMoths(t *testing.T) {
 		OptionWithAmount(amount),
 		OptionWithEmojies(emojies.CATS),
 	); err != nil {
-		t.Error("Expected to not return an error when creating new Moths:", err)
+		t.Error("Expected to not return an error when creating new generator:", err)
 	}
 }
 
-func TestNewMothsNoSecret(t *testing.T) {
+func TestNewGeneratorNoSecret(t *testing.T) {
 	amount := 6
 
 	_, err := NewGenerator(
@@ -35,11 +35,11 @@ func TestNewMothsNoSecret(t *testing.T) {
 	)
 
 	if !errors.Is(err, errs.ErrSecretLength) {
-		t.Error("Expected to return an error when creating new Moths without a secret:", err)
+		t.Error("Expected to return an error when creating new generator without a secret:", err)
 	}
 }
 
-func TestNewMothsNoInterval(t *testing.T) {
+func TestNewGeneratorNoInterval(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
@@ -50,11 +50,11 @@ func TestNewMothsNoInterval(t *testing.T) {
 	)
 
 	if !errors.Is(err, errs.ErrInterval1) {
-		t.Error("Expected to return an error when creating new Moths without an interval:", err)
+		t.Error("Expected to return an error when creating new generator without an interval:", err)
 	}
 }
 
-func TestNewMothsNoAmount(t *testing.T) {
+func TestNewGeneratorNoAmount(t *testing.T) {
 	secret := strings.Repeat("a", 32)
 
 	_, err := NewGenerator(
@@ -65,11 +65,11 @@ func TestNewMothsNoAmount(t *testing.T) {
 	)
 
 	if !errors.Is(err, errs.ErrAmount1) {
-		t.Error("Expected to return an error when creating new Moths without an amount:", err)
+		t.Error("Expected to return an error when creating new generator without an amount:", err)
 	}
 }
 
-func TestNewMothsNoEmojies(t *testing.T) {
+func TestNewGeneratorNoEmojies(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
@@ -80,6 +80,6 @@ func TestNewMothsNoEmojies(t *testing.T) {
 	)
 
 	if !errors.Is(err, errs.ErrEmojies1) {
-		t.Error("Expected to return an error when creating new Moths without any emojies:", err)
+		t.Error("Expected to return an error when creating new generator without any emojies:", err)
 	}
 }
