@@ -11,7 +11,7 @@ import (
 	"github.com/Mobilpadde/moths/v4/token/otp"
 )
 
-func (m *Moths) Next() (otp.OTP, error) {
+func (m *Generator) Next() (otp.OTP, error) {
 	token, err := m.getToken()
 	if err != nil {
 		return otp.OTP{}, err
@@ -20,7 +20,7 @@ func (m *Moths) Next() (otp.OTP, error) {
 	return otp.NewOTP(token, m.amount, m.emojies)
 }
 
-func (m *Moths) getToken() (string, error) {
+func (m *Generator) getToken() (string, error) {
 	m.timing.curr = time.Now().UTC()
 
 	since := m.timing.curr.Sub(m.timing.last)

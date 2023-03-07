@@ -12,7 +12,7 @@ func TestNextAndValidate(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
-	gen, err := NewMoths(
+	gen, err := NewGenerator(
 		OptionWithSecret(secret),
 		OptionWithInterval(time.Second),
 		OptionWithAmount(amount),

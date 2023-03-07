@@ -14,7 +14,7 @@ func TestNewMoths(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
-	if _, err := NewMoths(
+	if _, err := NewGenerator(
 		OptionWithSecret(secret),
 		OptionWithInterval(time.Second),
 		OptionWithAmount(amount),
@@ -27,7 +27,7 @@ func TestNewMoths(t *testing.T) {
 func TestNewMothsNoSecret(t *testing.T) {
 	amount := 6
 
-	_, err := NewMoths(
+	_, err := NewGenerator(
 		OptionWithSecret(""),
 		OptionWithInterval(time.Second),
 		OptionWithAmount(amount),
@@ -43,7 +43,7 @@ func TestNewMothsNoInterval(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
-	_, err := NewMoths(
+	_, err := NewGenerator(
 		OptionWithSecret(secret),
 		OptionWithAmount(amount),
 		OptionWithEmojies(emojies.CATS),
@@ -57,7 +57,7 @@ func TestNewMothsNoInterval(t *testing.T) {
 func TestNewMothsNoAmount(t *testing.T) {
 	secret := strings.Repeat("a", 32)
 
-	_, err := NewMoths(
+	_, err := NewGenerator(
 		OptionWithSecret(secret),
 		OptionWithAmount(0),
 		OptionWithInterval(time.Second),
@@ -73,7 +73,7 @@ func TestNewMothsNoEmojies(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
-	_, err := NewMoths(
+	_, err := NewGenerator(
 		OptionWithSecret(secret),
 		OptionWithInterval(time.Second),
 		OptionWithAmount(amount),

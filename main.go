@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/moths"
+	"github.com/Mobilpadde/moths/v4/token"
 	"github.com/Mobilpadde/moths/v4/token/emojies"
 )
 
@@ -20,13 +20,13 @@ func main() {
 	validationTicker := time.NewTicker(validationInterval)
 
 	var err error
-	var gen *moths.Moths
-	if gen, err = moths.NewMoths(
-		moths.OptionWithSecret(secret),
-		moths.OptionWithInterval(generationInterval),
-		moths.OptionWithAmount(amount),
-		moths.OptionWithEmojies(emojies.CATS),
-		moths.OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
+	var gen *token.Generator
+	if gen, err = token.NewGenerator(
+		token.OptionWithSecret(secret),
+		token.OptionWithInterval(generationInterval),
+		token.OptionWithAmount(amount),
+		token.OptionWithEmojies(emojies.CATS),
+		token.OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
 	); err != nil {
 		log.Fatalln(err)
 	}

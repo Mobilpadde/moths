@@ -8,7 +8,7 @@ import (
 	"github.com/Mobilpadde/moths/v4/token/emojies"
 )
 
-type Moths struct {
+type Generator struct {
 	secret  []byte
 	amount  int
 	emojies emojies.Emojies
@@ -23,10 +23,10 @@ type Moths struct {
 	}
 }
 
-type option func(*Moths) error
+type option func(*Generator) error
 
 func OptionWithSecret(secret string) option {
-	return func(m *Moths) error {
+	return func(m *Generator) error {
 		if err := checks.CheckSecret(secret); err != nil {
 			return err
 		}
@@ -42,7 +42,7 @@ func OptionWithSecret(secret string) option {
 }
 
 func OptionWithInterval(interval time.Duration) option {
-	return func(m *Moths) error {
+	return func(m *Generator) error {
 		if err := checks.CheckInterval(interval); err != nil {
 			return err
 		}
@@ -53,7 +53,7 @@ func OptionWithInterval(interval time.Duration) option {
 }
 
 func OptionWithAmount(amount int) option {
-	return func(m *Moths) error {
+	return func(m *Generator) error {
 		if err := checks.CheckAmount(amount); err != nil {
 			return err
 		}
@@ -64,7 +64,7 @@ func OptionWithAmount(amount int) option {
 }
 
 func OptionWithEmojies(emojies emojies.Emojies) option {
-	return func(m *Moths) error {
+	return func(m *Generator) error {
 		if err := checks.CheckEmojies(emojies); err != nil {
 			return err
 		}
@@ -75,7 +75,7 @@ func OptionWithEmojies(emojies emojies.Emojies) option {
 }
 
 func OptionWithTime(t time.Time) option {
-	return func(m *Moths) error {
+	return func(m *Generator) error {
 		m.timing.time = t
 		return nil
 	}

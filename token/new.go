@@ -6,8 +6,8 @@ import (
 	"github.com/Mobilpadde/moths/v4/token/checks"
 )
 
-func NewMoths(opts ...option) (*Moths, error) {
-	m := &Moths{
+func NewGenerator(opts ...option) (*Generator, error) {
+	m := &Generator{
 		interval: 0,
 		amount:   6, // Defaults to `6` as most other TOTP services uses that
 	}
