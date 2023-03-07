@@ -14,7 +14,7 @@ func TestNextAndValidate(t *testing.T) {
 
 	gen, err := NewGenerator(
 		OptionWithSecret(secret),
-		OptionWithInterval(time.Second),
+		OptionWithPeriod(time.Second),
 		OptionWithAmount(amount),
 		OptionWithEmojies(emojies.CATS),
 		OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),

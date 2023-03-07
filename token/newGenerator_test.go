@@ -16,7 +16,7 @@ func TestNewGenerator(t *testing.T) {
 
 	if _, err := NewGenerator(
 		OptionWithSecret(secret),
-		OptionWithInterval(time.Second),
+		OptionWithPeriod(time.Second),
 		OptionWithAmount(amount),
 		OptionWithEmojies(emojies.CATS),
 	); err != nil {
@@ -29,7 +29,7 @@ func TestNewGeneratorNoSecret(t *testing.T) {
 
 	_, err := NewGenerator(
 		OptionWithSecret(""),
-		OptionWithInterval(time.Second),
+		OptionWithPeriod(time.Second),
 		OptionWithAmount(amount),
 		OptionWithEmojies(emojies.CATS),
 	)
@@ -49,7 +49,7 @@ func TestNewGeneratorNoInterval(t *testing.T) {
 		OptionWithEmojies(emojies.CATS),
 	)
 
-	if !errors.Is(err, errs.ErrInterval1) {
+	if !errors.Is(err, errs.ErrPeriod1) {
 		t.Error("Expected to return an error when creating new generator without an interval:", err)
 	}
 }
@@ -60,7 +60,7 @@ func TestNewGeneratorNoAmount(t *testing.T) {
 	_, err := NewGenerator(
 		OptionWithSecret(secret),
 		OptionWithAmount(0),
-		OptionWithInterval(time.Second),
+		OptionWithPeriod(time.Second),
 		OptionWithEmojies(emojies.CATS),
 	)
 
@@ -75,7 +75,7 @@ func TestNewGeneratorNoEmojies(t *testing.T) {
 
 	_, err := NewGenerator(
 		OptionWithSecret(secret),
-		OptionWithInterval(time.Second),
+		OptionWithPeriod(time.Second),
 		OptionWithAmount(amount),
 	)
 

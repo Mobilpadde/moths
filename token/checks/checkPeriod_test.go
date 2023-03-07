@@ -9,15 +9,15 @@ import (
 )
 
 func TestCheckInterval(t *testing.T) {
-	if err := CheckInterval(time.Second); err != nil {
+	if err := CheckPeriod(time.Second); err != nil {
 		t.Error("Expected to not return an error when checking ok. interval:", err)
 	}
 }
 
 func TestCheckIntervalError(t *testing.T) {
-	err := CheckInterval(0)
+	err := CheckPeriod(0)
 
-	if !errors.Is(err, errs.ErrInterval1) {
+	if !errors.Is(err, errs.ErrPeriod1) {
 		t.Error("Expected to return an error when checking not ok. interval:", err)
 	}
 }

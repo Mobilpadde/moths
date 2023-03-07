@@ -23,7 +23,7 @@ func main() {
 	var gen *token.Generator
 	if gen, err = token.NewGenerator(
 		token.OptionWithSecret(secret),
-		token.OptionWithInterval(generationInterval),
+		token.OptionWithPeriod(generationInterval),
 		token.OptionWithAmount(amount),
 		token.OptionWithEmojies(emojies.CATS),
 		token.OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
