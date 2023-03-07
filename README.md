@@ -2,7 +2,7 @@
 
 > e**mo**jicon au**th**entication**s**
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/Mobilpadde/moths.svg)](https://pkg.go.dev/github.com/Mobilpadde/moths/v4)
+[![Go Reference](https://pkg.go.dev/badge/github.com/Mobilpadde/moths.svg)](https://pkg.go.dev/github.com/Mobilpadde/moths/v5)
 
 ## what (is this 💩)
 
@@ -53,14 +53,12 @@ go mod download
 >
 > This is just an one-liner to write the `base64`-encoded `sha256` of `moths` into `.env`.
 > Make sure to use something better 🤷
+>
+> You don't need to use environment variables, this is just my choice.
 
 ```sh
 echo 'moths' | sha256sum | base64 -w 0 | { echo -n "MOTHS_SECRET=$(cat -)" } > .env
 ```
-
-> **Note**
->
-> You don't need to use environment variables, this is just my choice.
 
 2. Run the program 🏃
 
@@ -72,10 +70,10 @@ As I said, easy-peasy! 💖
 
 ### options 👓
 
-To setup a new `moth`-generator, you must call [`moths.NewMoths`](moths/new.go#L9-L43) as
+To setup a new `code`-generator, you must call [`token.NewGenerator`](token/newGenerator.go#L9-L41) as
 
 ```go
-gen, err := moths.NewMoths()
+gen, err := token.NewGenerator()
 ```
 
 But I do recommend to add some customization, as it will fail immediately if not.
@@ -83,32 +81,31 @@ But I do recommend to add some customization, as it will fail immediately if not
 Like so
 
 ```go
-gen, err := moths.NewMoths(
-  moths.OptionWithSecret(secret), // any string as the secret
-  moths.OptionWithInterval(time.Second), // Each is only valid for a second
-  moths.OptionWithAmount(6), // Each must is always `6` emojies
-  moths.OptionWithEmojies(emojies.CATS), // A pure slice of cats
-  moths.OptionWithTime(time.Now().AddDate(10, 0, 0)), // 10 years into the future
+gen, err := token.NewGenerator(
+  token.OptionWithSecret(secret), // Any string as the secret
+  token.OptionWithPeriod(time.Second), // Each code is only valid for a second
+  token.OptionWithAmount(6), // Each must is always `6` emojies
+  token.OptionWithEmojies(emojies.CATS), // A pure slice of cats
+  token.OptionWithTime(time.Now().AddDate(10, 0, 0)), // 10 years into the future
 )
 ```
 
 There are a few options to choose from, these are
 
-- [`OptionWithSecret(secret string)`](moths/options.go#L29-L45)**\***
+- [`OptionWithSecret(secret string)`](token/optionSecret.go#L9-L32)**\***
   - The secret to generate from
-  - Must be 32 characters ⚠
-- [`OptionWithInterval(interval time.Duration)`](moths/options.go#L47-L56)**\***
-  - On which interval should a new `moth` be generated
-  - A `moth` will only be valid during this duration
-- [`OptionWithAmount(amount int)`](moths/options.go#L58-L67)
+- [`OptionWithPeriod(period time.Duration)`](token/optionPeriod.go#L9-L18)**\***
+  - On which interval should a new `code` be generated
+  - A `code` will only be valid during this duration - Until (if) skewed interval are implemented
+- [`OptionWithAmount(amount int)`](token/optionAmount.go#L7-L16)
   - The amount of emojies to generate in a `moth`
   - Defaults to `6`-charater tokens
-- [`OptionWithEmojies(emojies emojies.Emojies)`](moths/options.go#L69-L78)**\***
-  - Take a look in the [`emojies`](moths/emojies)-package to see your options
+- [`OptionWithEmojies(emojies emojies.Emojies)`](token/optionEmojies.go#L8-L17)**\***
+  - Take a look in the [`emojies`](token/emojies)-package to see your options
   - You can also add your own emojies - [How to](#emojies-)
-- [`OptionWithTime(t time.Time)`](moths/options.go#L80-L85)
+- [`OptionWithTime(t time.Time)`](token/optionTime.go#L5-L10)
   - This will allow you to add a custom time
-  - Meaning you can validate towards old `moths`
+  - Meaning you can validate towards old `code`s
   - You can even add future dates ⌛
   - Defaults to _now_
 
@@ -118,44 +115,44 @@ There are a few options to choose from, these are
 
 ### generating 🖇
 
-Now that you have a sparkly new `moth`-generator, you can use it as
+Now that you have a sparkly new `code`-generator, you can use it as
 
 ```go
-otp, err := gen.Next()
+code, err := gen.Next()
 ```
 
-Now that you have an [`OTP`](moths/otp), you can use its functions
+Now that you have a [`code`](token/code), you can use its functions
 
-- [`Validate(moth string) bool`](moths/otp/validate.go#L3-L5)
-  - Will validate a moth (pattern of emojies) directly
-- [`ValidateToken(token string) bool`](moths/otp/validate.go#L7-L9)
-  - Will validate a OTP token
-  - You'll need to expose the code for your user too, for this - not recommended
-- [`Token() string`](moths/otp/config.go#L12-L14)
+- [`Validate(emojies string) bool`](token/code/validate.go#L3-L5)
+  - Will validate a code (pattern of emojies) directly
+- [`ValidateToken(token string) bool`](token/code/validate.go#L7-L10) - **_DEPRECATED_**
+  - Will validate a token
+  - You'll need to expose the token to your user(s) for this - not recommended
+- [`String() string`](token/code/config.go#L16-L18)
+  - Returns the code as a string
+- [`SpacedString() string`](token/code/config.go#L20-L22)
+  - Returns the code as a string with spaces inbetween
+- [`Slice() []string`](token/code/config.go#L24-L26)
+  - Returns the code as a slice of strings
+- [`Token() string`](token/code/config.go#L37-L39) - **_DEPRECATED_**
   - Returns the token - for whatever reason that might be needed
-- [`String() string`](moths/otp/config.go#L16-L18)
-  - Returns the `moth` as a string
-- [`SpacedString() string`](moths/otp/config.go#L20-L22)
-  - Returns the `moth` as a string with spaces inbetween
-- [`Slice() []string`](moths/otp/config.go#L24-L26)
-  - Returns the `moth` as a slice of strings
 
 ### validating 🧑‍🔬
 
-To validate, you'll need both the `moth` (or the `token`) and the generator
+To validate, you'll need both the `code` (or the `token`) and the generator
 
 ```go
-token := otp.String() // Ideally you'd get this from the user
-ok := gen.Validate(token)
+str := code.String() // Ideally you'd get this from the user
+ok := gen.Validate(str)
 ```
 
 ### emojies 😻
 
-To use your own set of **known** emojies, you can reference the [`cat`-emojies](moths/emojies/cats.go).
+To use your own set of **known** emojies, you can reference the [`cat`-emojies](token/emojies/cats.go).
 
 I've chosen the `cats` as it's a great reference, both for creating and re-using.
 
-If we would like to add an easter-egg to a pure bred slice of cats, we could do it like:
+If we would like to add an easter-egg to a purebred slice of cats, we could do it like:
 
 ```go
 // A slice of cat emojies and a single hotdog 🌭
@@ -177,8 +174,8 @@ var CATS_HOTDOG = ToEmojies(catsHotdog)
 ```
 
 It doesn't even have to be from the [emoji](https://github.com/enescakir/emoji)-package,
-simply make a slice of your desired emojies, and use the [`ToEmojies`-func](moths/emojies/helper.go#L5-L19).
-Then provide this as an argument in `moths.OptionWithEmojies(CATS_HOTDOG)` when calling the `moths.NewMoths()`.
+simply make a slice of your desired emojies, and use the [`ToEmojies`-func](token/emojies/helper.go#L5-L19).
+Then provide this as an argument in `token.OptionWithEmojies(CATS_HOTDOG)` when calling the `token.NewGenerator()`.
 
 ## example 🤷
 
@@ -190,11 +187,12 @@ Check out [`main.go`](main.go) for an example
 
 ## history ✍
 
-- [`v4.0.1`](https://github.com/Mobilpadde/moths/tree/v4.0.1) 💘
+- [`v5.0.0`](https://github.com/Mobilpadde/moths/tree/v5.0.0) 💘
 
 - <details>
     <summary>Older</summary>
 
+  - [`v4.0.1`](https://github.com/Mobilpadde/moths/tree/v4.0.1)
   - [`v4.0.0`](https://github.com/Mobilpadde/moths/tree/v4.0.0)
   - [`v3.0.0`](https://github.com/Mobilpadde/moths/tree/v3.0.0)
   - [`v2.2.2`](https://github.com/Mobilpadde/moths/tree/v2.2.2)
@@ -208,11 +206,13 @@ Check out [`main.go`](main.go) for an example
 
 ## future 🔮
 
-- ~~Rename `moth` to something better (`OTP` / `Token`)~~ - TODO: Add commit here
+- Add [Skew Intervals](https://www.ibm.com/docs/en/sva/9.0.6?topic=authentication-configuring-totp-one-time-password-mechanism) 🕰️
 - Add better documentation 🫢
-- ~~Rename the `Moths`-struct to `Generator`~~ - TODO: Add commit here
-  - This means renaming the [`otp`](moths/otp)-package as well (`totp`)?
-- Get [pkg.go.dev](https://pkg.go.dev/github.com/Mobilpadde/moths) up-to-date
+- Get into fixing [`geatures`](token/emojies/gestures.go#L22-L60) 🤦
+- ~~Rename `moth` to something better (`OTP` / `Token`)~~ - 6105848b336d57af5cc60fe53aa60532d2f979a4
+- ~~Rename the `Moths`-struct to `Generator`~~ - 4c973ef15c6f6102aaf3741aeb64ea35663b0b9c
+  - ~~This means renaming the `otp`-package as well?~~ - fcdf295111bec0b516db62c3879bf4b7d7fd4436
+- ~~Get [pkg.go.dev](https://pkg.go.dev/github.com/Mobilpadde/moths) up-to-date~~ - Works with [v5](https://pkg.go.dev/github.com/Mobilpadde/moths/v5)
 
 ## shoutout 📢💨
 
