@@ -4,13 +4,28 @@ import (
 	"math"
 	"math/bits"
 	"strings"
+	"time"
 
 	"github.com/Mobilpadde/moths/v4/token/emojies"
 )
 
 const EmojiBytes = 4
 
-func NewCode(token string, amount int, em emojies.Emojies) (Code, error) {
+func NewCode(token string, amount int, em emojies.Emojies, createdAt time.Time, expiresAt time.Time) (Code, error) {
+	code, err := generateCode(token, amount, em)
+	if err != nil {
+		return Code{}, err
+	}
+
+	return Code{
+		token:     token,
+		emojies:   code,
+		createdAt: createdAt,
+		expiresAt: expiresAt,
+	}, nil
+}
+
+func generateCode(token string, amount int, em emojies.Emojies) (emojies.Emojies, error) {
 	emojiAmount := len(em)
 	size := EmojiBytes * amount
 
@@ -26,7 +41,7 @@ loop:
 	for {
 		randomBuffer, err := buffer(step)
 		if err != nil {
-			return Code{}, err
+			return emojies.EMPTY, err
 		}
 
 		for i := 0; i < step; i++ {
@@ -34,7 +49,7 @@ loop:
 
 			if currentIndex < emojiAmount {
 				if _, err := code.WriteRune(em[currentIndex]); err != nil {
-					return Code{}, err
+					return emojies.EMPTY, err
 				} else if code.Len() == size {
 					break loop
 				}
@@ -47,8 +62,5 @@ loop:
 	}
 
 	split := strings.Split(code.String(), "")
-	return Code{
-		token:   token,
-		emojies: emojies.ToEmojies(split),
-	}, nil
+	return emojies.ToEmojies(split), nil
 }

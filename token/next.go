@@ -17,7 +17,7 @@ func (m *Generator) Next() (code.Code, error) {
 		return code.Code{}, err
 	}
 
-	return code.NewCode(token, m.amount, m.emojies)
+	return code.NewCode(token, m.amount, m.emojies, m.timing.time, m.timing.time.Add(m.interval))
 }
 
 func (m *Generator) getToken() (string, error) {
