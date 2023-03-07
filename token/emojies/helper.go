@@ -2,6 +2,8 @@ package emojies
 
 import "unicode/utf8"
 
+// ToEmojies can be used to convert a
+// slice of strings to [Emojies].
 func ToEmojies(emojies []string) Emojies {
 	em := Emojies{}
 

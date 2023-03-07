@@ -4,6 +4,8 @@ import (
 	"github.com/Mobilpadde/moths/v5/token/checks"
 )
 
+// OptionWithAmount is used to specify
+// the amount of emojies in a code.
 func OptionWithAmount(amount int) Option {
 	return func(m *Generator) error {
 		if err := checks.CheckAmount(amount); err != nil {

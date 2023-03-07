@@ -11,6 +11,9 @@ import (
 
 const EmojiBytes = 4
 
+// NewCode creates a new code
+//
+// This is generally not for public usage.
 func NewCode(token string, amount int, em emojies.Emojies, createdAt time.Time, expiresAt time.Time) (Code, error) {
 	code, err := generateCode(token, amount, em)
 	if err != nil {

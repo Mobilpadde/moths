@@ -6,6 +6,8 @@ import (
 	"github.com/Mobilpadde/moths/v5/token/checks"
 )
 
+// NewGenerator creates a new token generator
+// with the given [Option]s.
 func NewGenerator(opts ...Option) (*Generator, error) {
 	m := &Generator{
 		amount: 6, // Defaults to `6` as most other TOTP codes are this length
