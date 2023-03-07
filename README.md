@@ -209,9 +209,9 @@ Check out [`main.go`](main.go) for an example
 - Add [Skew Intervals](https://www.ibm.com/docs/en/sva/9.0.6?topic=authentication-configuring-totp-one-time-password-mechanism) 🕰️
 - Add better documentation 🫢
 - Get into fixing [`geatures`](token/emojies/gestures.go#L22-L60) 🤦
-- ~~Rename `moth` to something better (`OTP` / `Token`)~~ - 6105848b336d57af5cc60fe53aa60532d2f979a4
-- ~~Rename the `Moths`-struct to `Generator`~~ - 4c973ef15c6f6102aaf3741aeb64ea35663b0b9c
-  - ~~This means renaming the `otp`-package as well?~~ - fcdf295111bec0b516db62c3879bf4b7d7fd4436
+- ~~Rename `moth` to something better (`OTP` / `Token`)~~ - [6105848](https://github.com/Mobilpadde/moths/commit/6105848b336d57af5cc60fe53aa60532d2f979a4)
+- ~~Rename the `Moths`-struct to `Generator`~~ - [4c973ef](https://github.com/Mobilpadde/moths/commit/4c973ef15c6f6102aaf3741aeb64ea35663b0b9c)
+  - ~~This means renaming the `otp`-package as well?~~ - [fcdf295](https://github.com/Mobilpadde/moths/commit/fcdf295111bec0b516db62c3879bf4b7d7fd4436)
 - ~~Get [pkg.go.dev](https://pkg.go.dev/github.com/Mobilpadde/moths) up-to-date~~ - Works with [v5](https://pkg.go.dev/github.com/Mobilpadde/moths/v5)
 
 ## shoutout 📢💨
