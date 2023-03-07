@@ -8,16 +8,16 @@ import (
 	"math"
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/token/otp"
+	"github.com/Mobilpadde/moths/v4/token/code"
 )
 
-func (m *Generator) Next() (otp.OTP, error) {
+func (m *Generator) Next() (code.Code, error) {
 	token, err := m.getToken()
 	if err != nil {
-		return otp.OTP{}, err
+		return code.Code{}, err
 	}
 
-	return otp.NewOTP(token, m.amount, m.emojies)
+	return code.NewCode(token, m.amount, m.emojies)
 }
 
 func (m *Generator) getToken() (string, error) {
@@ -33,7 +33,7 @@ func (m *Generator) getToken() (string, error) {
 
 	interval := uint64(m.timing.time.Unix() / int64(m.interval.Seconds()))
 
-	// https://github.com/pquerna/otp/blob/master/hotp/hotp.go#L95-L123
+	// https://github.com/pquerna/code/blob/master/hotp/hotp.go#L95-L123
 	buf := make([]byte, 8)
 	h := hmac.New(sha1.New, m.secret)
 	binary.BigEndian.PutUint64(buf, interval)

@@ -1,4 +1,4 @@
-package otp
+package code
 
 import (
 	"testing"
@@ -6,14 +6,14 @@ import (
 	"github.com/Mobilpadde/moths/v4/token/emojies"
 )
 
-func TestNewOTP(t *testing.T) {
+func TestNewCode(t *testing.T) {
 	amount := 6
 	token := "000000"
 	correct := "😸😼😹😺😸😻"
 
-	otp, err := NewOTP(token, amount, emojies.CATS)
+	otp, err := NewCode(token, amount, emojies.CATS)
 	if err != nil {
-		t.Error("Expected to not return an error when creating new OTP:", err)
+		t.Error("Expected to not return an error when creating new code:", err)
 	}
 
 	if otp.token != token {

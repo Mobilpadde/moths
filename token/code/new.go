@@ -1,4 +1,4 @@
-package otp
+package code
 
 import (
 	"math"
@@ -10,7 +10,7 @@ import (
 
 const EmojiBytes = 4
 
-func NewOTP(token string, amount int, em emojies.Emojies) (OTP, error) {
+func NewCode(token string, amount int, em emojies.Emojies) (Code, error) {
 	emojiAmount := len(em)
 	size := EmojiBytes * amount
 
@@ -26,7 +26,7 @@ loop:
 	for {
 		randomBuffer, err := buffer(step)
 		if err != nil {
-			return OTP{}, err
+			return Code{}, err
 		}
 
 		for i := 0; i < step; i++ {
@@ -34,7 +34,7 @@ loop:
 
 			if currentIndex < emojiAmount {
 				if _, err := code.WriteRune(em[currentIndex]); err != nil {
-					return OTP{}, err
+					return Code{}, err
 				} else if code.Len() == size {
 					break loop
 				}
@@ -47,7 +47,7 @@ loop:
 	}
 
 	split := strings.Split(code.String(), "")
-	return OTP{
+	return Code{
 		token:   token,
 		emojies: emojies.ToEmojies(split),
 	}, nil
