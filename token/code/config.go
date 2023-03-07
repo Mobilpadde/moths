@@ -13,11 +13,6 @@ type Code struct {
 	expiresAt time.Time
 }
 
-// Deprecated: Insecure. Use `String`, `SpacedString` or `Slice` instead.
-func (code Code) Token() string {
-	return code.token
-}
-
 func (code Code) String() string {
 	return code.emojies.String()
 }
@@ -36,4 +31,9 @@ func (code Code) CreatedAt() time.Time {
 
 func (code Code) ExpiresAt() time.Time {
 	return code.expiresAt
+}
+
+// Deprecated: Insecure. Use `String`, `SpacedString` or `Slice` instead.
+func (code Code) Token() string {
+	return code.token
 }

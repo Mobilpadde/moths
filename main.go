@@ -41,18 +41,18 @@ func main() {
 
 	for {
 		log.Println()
-		otp, err := gen.Next()
+		code, err := gen.Next()
 		if err != nil {
 			log.Fatalln(err)
 		}
 
-		log.Printf(`Your code is "%s" and code is %s`, otp.SpacedString(), otp.Token())
+		log.Printf(`Your code is "%s" and code is %s`, code.SpacedString(), code.Token())
 		<-validationTicker.C
 
-		log.Printf("Is this still valid after %s? %t", validationInterval, gen.Validate(otp.String()))
+		log.Printf("Is this still valid after %s? %t", validationInterval, gen.Validate(code.String()))
 		<-validationTicker.C
 
-		log.Printf("Is this still valid after %s? %t", validationInterval*2, gen.Validate(otp.String()))
+		log.Printf("Is this still valid after %s? %t", validationInterval*2, gen.Validate(code.String()))
 		<-generationTicker.C
 	}
 }
