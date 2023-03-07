@@ -8,8 +8,7 @@ import (
 
 func NewGenerator(opts ...Option) (*Generator, error) {
 	m := &Generator{
-		interval: 0,
-		amount:   6, // Defaults to `6` as most other TOTP codes are this length
+		amount: 6, // Defaults to `6` as most other TOTP codes are this length
 	}
 
 	for _, opt := range opts {
@@ -20,12 +19,12 @@ func NewGenerator(opts ...Option) (*Generator, error) {
 
 	now := time.Now().UTC()
 	m.timing.curr = now
-	m.timing.last = now.Add(-m.interval)
+	m.timing.last = now.Add(-m.period)
 	if m.timing.time == (time.Time{}) {
 		m.timing.time = now
 	}
 
-	if err := checks.CheckInterval(m.interval); err != nil {
+	if err := checks.CheckPeriod(m.period); err != nil {
 		return nil, err
 	}
 

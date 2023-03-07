@@ -6,13 +6,13 @@ import (
 	"github.com/Mobilpadde/moths/v4/token/checks"
 )
 
-func OptionWithInterval(interval time.Duration) Option {
+func OptionWithPeriod(period time.Duration) Option {
 	return func(m *Generator) error {
-		if err := checks.CheckInterval(interval); err != nil {
+		if err := checks.CheckPeriod(period); err != nil {
 			return err
 		}
 
-		m.interval = interval
+		m.period = period
 		return nil
 	}
 }

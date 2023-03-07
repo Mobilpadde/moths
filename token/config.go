@@ -11,7 +11,7 @@ type Generator struct {
 	amount  int
 	emojies emojies.Emojies
 
-	interval  time.Duration
+	period    time.Duration
 	lastToken string
 
 	timing struct {

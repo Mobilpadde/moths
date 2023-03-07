@@ -14,8 +14,8 @@ const (
 	// Emojies must have at least one character
 	emojies1 string = "emojies must be at least 1 character"
 
-	// Interval must be at least 1s
-	interval1 string = "interval must be at least 1000ms"
+	// Period must be at least 1s
+	period1 string = "interval must be at least 1000ms"
 
 	// Amount must be at least 1 emoji
 	amount1 string = "interval must be at least 1 emoji"
@@ -24,6 +24,6 @@ const (
 var (
 	ErrSecretLength error = errors.New(secretLength)
 	ErrEmojies1     error = errors.New(emojies1)
-	ErrInterval1    error = errors.New(interval1)
+	ErrPeriod1      error = errors.New(period1)
 	ErrAmount1      error = errors.New(amount1)
 )

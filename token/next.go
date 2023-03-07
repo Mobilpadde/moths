@@ -17,26 +17,26 @@ func (m *Generator) Next() (code.Code, error) {
 		return code.Code{}, err
 	}
 
-	return code.NewCode(token, m.amount, m.emojies, m.timing.time, m.timing.time.Add(m.interval))
+	return code.NewCode(token, m.amount, m.emojies, m.timing.time, m.timing.time.Add(m.period))
 }
 
 func (m *Generator) getToken() (string, error) {
 	m.timing.curr = time.Now().UTC()
 
 	since := m.timing.curr.Sub(m.timing.last)
-	if since < m.interval {
+	if since < m.period {
 		return m.lastToken, nil
 	}
 
 	m.timing.last = m.timing.curr
 	m.timing.time = m.timing.time.Add(since)
 
-	interval := uint64(m.timing.time.Unix() / int64(m.interval.Seconds()))
+	period := uint64(m.timing.time.Unix() / int64(m.period.Seconds()))
 
 	// https://github.com/pquerna/code/blob/master/hotp/hotp.go#L95-L123
 	buf := make([]byte, 8)
 	h := hmac.New(sha1.New, m.secret)
-	binary.BigEndian.PutUint64(buf, interval)
+	binary.BigEndian.PutUint64(buf, period)
 
 	h.Write(buf)
 	sum := h.Sum(nil)
