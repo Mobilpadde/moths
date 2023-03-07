@@ -1,8 +1,7 @@
 package moths
 
 import (
-	"encoding/base32"
-	"strings"
+	"encoding/base64"
 	"time"
 
 	"github.com/Mobilpadde/moths/moths/checks"
@@ -32,14 +31,12 @@ func OptionWithSecret(secret string) option {
 			return err
 		}
 
-		// Setup the secret as an encoded key
-		secret = strings.ToUpper(secret)
-		key, err := base32.StdEncoding.DecodeString(secret)
-		if err != nil {
-			return err
-		}
+		// Encode the secret as base64 - for extra security (🤷)
+		data := []byte(secret)
+		dst := make([]byte, base64.StdEncoding.EncodedLen(len(data)))
+		base64.StdEncoding.Encode(dst, data)
 
-		m.secret = key
+		m.secret = dst
 		return nil
 	}
 }
