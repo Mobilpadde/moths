@@ -6,7 +6,7 @@ import (
 	"github.com/Mobilpadde/moths/v4/token/checks"
 )
 
-func NewGenerator(opts ...option) (*Generator, error) {
+func NewGenerator(opts ...Option) (*Generator, error) {
 	m := &Generator{
 		interval: 0,
 		amount:   6, // Defaults to `6` as most other TOTP services uses that
@@ -23,10 +23,6 @@ func NewGenerator(opts ...option) (*Generator, error) {
 	m.timing.last = now.Add(-m.interval)
 	if m.timing.time == (time.Time{}) {
 		m.timing.time = now
-	}
-
-	if err := checks.CheckSecretKey(m.secret); err != nil {
-		return nil, err
 	}
 
 	if err := checks.CheckInterval(m.interval); err != nil {
