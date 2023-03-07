@@ -1,6 +1,8 @@
 package token
 
 import (
+	"time"
+
 	"github.com/Mobilpadde/moths/v4/token/code"
 )
 
@@ -14,7 +16,7 @@ func (m *Generator) Validate(moth string) bool {
 		return false
 	}
 
-	same, err := code.NewCode(token, m.amount, m.emojies)
+	same, err := code.NewCode(token, m.amount, m.emojies, time.Time{}, time.Time{})
 	if err != nil {
 		return false
 	}
@@ -33,7 +35,7 @@ func (m *Generator) ValidateToken(oldToken string) bool {
 		return false
 	}
 
-	same, err := code.NewCode(token, m.amount, m.emojies)
+	same, err := code.NewCode(token, m.amount, m.emojies, time.Time{}, time.Time{})
 	if err != nil {
 		return false
 	}
