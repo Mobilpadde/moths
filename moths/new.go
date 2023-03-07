@@ -21,6 +21,9 @@ func NewMoths(opts ...option) (*Moths, error) {
 	now := time.Now().UTC()
 	m.timing.curr = now
 	m.timing.last = now.Add(-m.interval)
+	if m.timing.time == (time.Time{}) {
+		m.timing.time = now
+	}
 
 	if err := checks.CheckSecretKey(m.secret); err != nil {
 		return nil, err
