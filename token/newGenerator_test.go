@@ -83,3 +83,55 @@ func TestNewGeneratorNoEmojies(t *testing.T) {
 		t.Error("Expected to return an error when creating new generator without any emojies:", err)
 	}
 }
+
+// Instantiate a new generator with
+// a secret, period, amount, and emojies.
+//
+// Use this generator to generate new codes
+// from the options provided.
+func ExampleNewGenerator() {
+	amount := 6
+	secret := strings.Repeat("a", 32)
+
+	gen, _ := NewGenerator(
+		OptionWithSecret(secret),
+		OptionWithPeriod(time.Second),
+		OptionWithAmount(amount),
+		OptionWithEmojies(emojies.CATS),
+	)
+
+	gen.Next()
+}
+
+// Instantiates a generator as above,
+// but also with a specified time.
+//
+// This will **always** generate the same
+// codes *virtually forever*.
+//
+// If we chose to generate **five** codes,
+// these would be as follows:
+//
+// 🙀 😾 😹 🙀 😼 😹
+//
+// 😻 😹 😽 😹 😽 😿
+//
+// 😹 😽 😻 😸 😻 🙀
+//
+// 😼 😼 😾 😾 😿 😹
+//
+// 😿 😽 😿 🙀 😼 😻
+func ExampleNewGenerator_withTime() {
+	amount := 6
+	secret := strings.Repeat("a", 32)
+
+	gen, _ := NewGenerator(
+		OptionWithSecret(secret),
+		OptionWithPeriod(time.Second),
+		OptionWithAmount(amount),
+		OptionWithEmojies(emojies.CATS),
+		OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
+	)
+
+	gen.Next()
+}
