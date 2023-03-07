@@ -47,7 +47,7 @@ Running this is quite easy 💨
 go mod download
 ```
 
-1. Make a secret of **32** characters 🔐
+1. Add a secret 🔐
 
 > **Warning**
 >
@@ -55,8 +55,12 @@ go mod download
 > Make sure to use something better 🤷
 
 ```sh
-echo 'moths' | sha256sum | base64 | head -c 32 | { echo -n "MOTHS_SECRET=$(cat -)" } > .env
+echo 'moths' | sha256sum | base64 -w 0 | { echo -n "MOTHS_SECRET=$(cat -)" } > .env
 ```
+
+> **Note**
+>
+> You don't need to use environment variables, this is just my choice.
 
 2. Run the program 🏃
 
@@ -80,7 +84,7 @@ Like so
 
 ```go
 gen, err := moths.NewMoths(
-  moths.OptionWithSecret(secret), // 32 character secret
+  moths.OptionWithSecret(secret), // any string as the secret
   moths.OptionWithInterval(time.Second), // Each is only valid for a second
   moths.OptionWithAmount(6), // Each must is always `6` emojies
   moths.OptionWithEmojies(emojies.CATS), // A pure slice of cats
@@ -98,6 +102,7 @@ There are a few options to choose from, these are
   - A `moth` will only be valid during this duration
 - [`OptionWithAmount(amount int)`](moths/options.go#L58-L67)
   - The amount of emojies to generate in a `moth`
+  - Defaults to `6`-charater tokens
 - [`OptionWithEmojies(emojies emojies.Emojies)`](moths/options.go#L69-L78)**\***
   - Take a look in the [`emojies`](moths/emojies)-package to see your options
   - You can also add your own emojies - [How to](#emojies-)
@@ -105,6 +110,7 @@ There are a few options to choose from, these are
   - This will allow you to add a custom time
   - Meaning you can validate towards old `moths`
   - You can even add future dates ⌛
+  - Defaults to _now_
 
 > **Warning**
 >
