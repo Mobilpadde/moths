@@ -190,7 +190,7 @@ Check out [`main.go`](main.go) for an example
 
 ## history ✍
 
-- [`v3.0.0`](https://github.com/Mobilpadde/moths/tree/v4.0.0) 💘
+- [`v4.0.0`](https://github.com/Mobilpadde/moths/tree/v4.0.0) 💘
 
 - <details>
     <summary>Older</summary>
