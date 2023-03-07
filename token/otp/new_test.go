@@ -3,7 +3,7 @@ package otp
 import (
 	"testing"
 
-	"github.com/Mobilpadde/moths/v4/moths/emojies"
+	"github.com/Mobilpadde/moths/v4/token/emojies"
 )
 
 func TestNewOTP(t *testing.T) {

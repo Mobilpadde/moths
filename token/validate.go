@@ -1,7 +1,7 @@
-package moths
+package token
 
 import (
-	"github.com/Mobilpadde/moths/v4/moths/otp"
+	"github.com/Mobilpadde/moths/v4/token/otp"
 )
 
 func (m *Moths) Validate(moth string) bool {

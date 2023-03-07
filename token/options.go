@@ -1,11 +1,11 @@
-package moths
+package token
 
 import (
 	"encoding/base64"
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/moths/checks"
-	"github.com/Mobilpadde/moths/v4/moths/emojies"
+	"github.com/Mobilpadde/moths/v4/token/checks"
+	"github.com/Mobilpadde/moths/v4/token/emojies"
 )
 
 type Moths struct {

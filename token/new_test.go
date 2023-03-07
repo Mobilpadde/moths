@@ -1,4 +1,4 @@
-package moths
+package token
 
 import (
 	"errors"
@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/moths/emojies"
-	"github.com/Mobilpadde/moths/v4/moths/errs"
+	"github.com/Mobilpadde/moths/v4/token/emojies"
+	"github.com/Mobilpadde/moths/v4/token/errs"
 )
 
 func TestNewMoths(t *testing.T) {

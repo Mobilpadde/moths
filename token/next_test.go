@@ -1,11 +1,11 @@
-package moths
+package token
 
 import (
 	"strings"
 	"testing"
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/moths/emojies"
+	"github.com/Mobilpadde/moths/v4/token/emojies"
 )
 
 func TestNextAndValidate(t *testing.T) {

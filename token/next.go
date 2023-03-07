@@ -1,4 +1,4 @@
-package moths
+package token
 
 import (
 	"crypto/hmac"
@@ -8,7 +8,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/moths/otp"
+	"github.com/Mobilpadde/moths/v4/token/otp"
 )
 
 func (m *Moths) Next() (otp.OTP, error) {

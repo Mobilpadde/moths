@@ -1,9 +1,9 @@
-package moths
+package token
 
 import (
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/moths/checks"
+	"github.com/Mobilpadde/moths/v4/token/checks"
 )
 
 func NewMoths(opts ...option) (*Moths, error) {

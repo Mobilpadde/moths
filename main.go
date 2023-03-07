@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/Mobilpadde/moths/v4/moths"
-	"github.com/Mobilpadde/moths/v4/moths/emojies"
+	"github.com/Mobilpadde/moths/v4/token/emojies"
 )
 
 func main() {
