@@ -2,7 +2,7 @@
 
 > e**mo**jicon au**th**entication**s**
 
-[![Go Reference](https://pkg.go.dev/badge/github.com/Mobilpadde/moths.svg)](https://pkg.go.dev/github.com/Mobilpadde/moths)
+[![Go Reference](https://pkg.go.dev/badge/github.com/Mobilpadde/moths.svg)](https://pkg.go.dev/github.com/Mobilpadde/moths/v4)
 
 ## what (is this 💩)
 
