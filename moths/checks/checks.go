@@ -8,17 +8,17 @@ import (
 )
 
 func CheckSecret(secret string) error {
-	if len(secret) != 32 {
-		return errs.ErrSecret32
+	if len(secret) == 0 {
+		return errs.ErrSecretLength
 	}
 
 	return nil
 }
 
 func CheckSecretKey(key []byte) error {
-	if len(key) != 20 {
-		return errs.ErrKey20
-	}
+	// if len(key) != 20 {
+	// 	return errs.ErrKey20
+	// }
 
 	return nil
 }

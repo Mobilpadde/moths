@@ -5,11 +5,11 @@ import (
 )
 
 const (
-	// Secret must have 32 characters
-	secret32 string = "secret must be 32 characters"
+	// Secret must have at least 1 characters
+	secretLength string = "secret must be at least 1 character"
 
 	// Key must be of 20 in length
-	key20 string = "key could not be parsed from secret"
+	// key20 string = "key could not be parsed from secret"
 
 	// Emojies must have at least one character
 	emojies1 string = "emojies must be at least 1 character"
@@ -22,8 +22,8 @@ const (
 )
 
 var (
-	ErrSecret32  error = errors.New(secret32)
-	ErrKey20     error = errors.New(key20)
+	ErrSecretLength error = errors.New(secretLength)
+	// ErrKey20        error = errors.New(key20)
 	ErrEmojies1  error = errors.New(emojies1)
 	ErrInterval1 error = errors.New(interval1)
 	ErrAmount1   error = errors.New(amount1)
