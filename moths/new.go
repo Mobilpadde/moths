@@ -9,7 +9,7 @@ import (
 func NewMoths(opts ...option) (*Moths, error) {
 	m := &Moths{
 		interval: 0,
-		amount:   6, // Defaults to `6` as most other services uses that
+		amount:   6, // Defaults to `6` as most other TOTP services uses that
 	}
 
 	for _, opt := range opts {
