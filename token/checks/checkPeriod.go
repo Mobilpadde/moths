@@ -3,7 +3,7 @@ package checks
 import (
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/token/errs"
+	"github.com/Mobilpadde/moths/v5/token/errs"
 )
 
 func CheckPeriod(period time.Duration) error {

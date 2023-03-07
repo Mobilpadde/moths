@@ -3,7 +3,7 @@ package token
 import (
 	"encoding/base64"
 
-	"github.com/Mobilpadde/moths/v4/token/checks"
+	"github.com/Mobilpadde/moths/v5/token/checks"
 )
 
 func OptionWithSecret(secret string) Option {

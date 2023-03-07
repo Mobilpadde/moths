@@ -1,6 +1,6 @@
 package checks
 
-import "github.com/Mobilpadde/moths/v4/token/errs"
+import "github.com/Mobilpadde/moths/v5/token/errs"
 
 func CheckSecret(secret string) error {
 	if len(secret) == 0 {

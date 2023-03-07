@@ -3,7 +3,7 @@ package token
 import (
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/token/code"
+	"github.com/Mobilpadde/moths/v5/token/code"
 )
 
 func (m *Generator) Validate(moth string) bool {

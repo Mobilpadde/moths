@@ -3,7 +3,7 @@ package token
 import (
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/token/checks"
+	"github.com/Mobilpadde/moths/v5/token/checks"
 )
 
 func NewGenerator(opts ...Option) (*Generator, error) {

@@ -1,7 +1,7 @@
 package token
 
 import (
-	"github.com/Mobilpadde/moths/v4/token/checks"
+	"github.com/Mobilpadde/moths/v5/token/checks"
 )
 
 func OptionWithAmount(amount int) Option {

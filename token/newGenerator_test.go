@@ -6,8 +6,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/token/emojies"
-	"github.com/Mobilpadde/moths/v4/token/errs"
+	"github.com/Mobilpadde/moths/v5/token/emojies"
+	"github.com/Mobilpadde/moths/v5/token/errs"
 )
 
 func TestNewGenerator(t *testing.T) {

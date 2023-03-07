@@ -8,7 +8,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/Mobilpadde/moths/v4/token/code"
+	"github.com/Mobilpadde/moths/v5/token/code"
 )
 
 func (m *Generator) Next() (code.Code, error) {

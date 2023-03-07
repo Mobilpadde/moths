@@ -4,7 +4,7 @@ import (
 	"errors"
 	"testing"
 
-	"github.com/Mobilpadde/moths/v4/token/errs"
+	"github.com/Mobilpadde/moths/v5/token/errs"
 )
 
 func TestCheckAmount(t *testing.T) {
