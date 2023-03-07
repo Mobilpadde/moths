@@ -208,10 +208,9 @@ Check out [`main.go`](main.go) for an example
 
 ## future 🔮
 
-- ~~Rename `moth` to something better (`OTP` / `Token`)~~
-  - TODO: Add commit here
+- ~~Rename `moth` to something better (`OTP` / `Token`)~~ - TODO: Add commit here
 - Add better documentation 🫢
-- Rename the `gen`-variable to `totp`
+- ~~Rename the `Moths`-struct to `Generator`~~ - TODO: Add commit here
   - This means renaming the [`otp`](moths/otp)-package as well (`totp`)?
 - Get [pkg.go.dev](https://pkg.go.dev/github.com/Mobilpadde/moths) up-to-date
 
