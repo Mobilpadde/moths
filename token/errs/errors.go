@@ -23,8 +23,7 @@ const (
 
 var (
 	ErrSecretLength error = errors.New(secretLength)
-	// ErrKey20        error = errors.New(key20)
-	ErrEmojies1  error = errors.New(emojies1)
-	ErrInterval1 error = errors.New(interval1)
-	ErrAmount1   error = errors.New(amount1)
+	ErrEmojies1     error = errors.New(emojies1)
+	ErrInterval1    error = errors.New(interval1)
+	ErrAmount1      error = errors.New(amount1)
 )

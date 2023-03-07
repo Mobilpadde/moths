@@ -9,7 +9,7 @@ import (
 func NewGenerator(opts ...Option) (*Generator, error) {
 	m := &Generator{
 		interval: 0,
-		amount:   6, // Defaults to `6` as most other TOTP services uses that
+		amount:   6, // Defaults to `6` as most other TOTP codes are this length
 	}
 
 	for _, opt := range opts {
@@ -33,7 +33,7 @@ func NewGenerator(opts ...Option) (*Generator, error) {
 		return nil, err
 	}
 
-	// Checks if everything is working
+	// Check if everything is working
 	if _, err := m.getToken(); err != nil {
 		return nil, err
 	}

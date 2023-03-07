@@ -9,6 +9,7 @@ type Code struct {
 	emojies emojies.Emojies
 }
 
+// Deprecated: Insecure. Use `String`, `SpacedString` or `Slice` instead.
 func (code Code) Token() string {
 	return code.token
 }
