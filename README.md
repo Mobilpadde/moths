@@ -187,11 +187,13 @@ Check out [`main.go`](main.go) for an example
 
 ## history ✍
 
-- [`v5.0.0`](https://github.com/Mobilpadde/moths/tree/v5.0.0) 💘
+- [`v5.0.2`](https://github.com/Mobilpadde/moths/tree/v5.0.2) 💘
 
 - <details>
     <summary>Older</summary>
 
+  - [`v5.0.1`](https://github.com/Mobilpadde/moths/tree/v5.0.1)
+  - [`v5.0.0`](https://github.com/Mobilpadde/moths/tree/v5.0.0)
   - [`v4.0.1`](https://github.com/Mobilpadde/moths/tree/v4.0.1)
   - [`v4.0.0`](https://github.com/Mobilpadde/moths/tree/v4.0.0)
   - [`v3.0.0`](https://github.com/Mobilpadde/moths/tree/v3.0.0)
