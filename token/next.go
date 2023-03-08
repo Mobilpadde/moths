@@ -17,7 +17,10 @@ func (m *Generator) Next() (code.Code, error) {
 		return code.Code{}, err
 	}
 
-	return code.NewCode(token, m.amount, m.emojies, m.timing.time, m.timing.time.Add(m.period))
+	period := uint64(m.timing.time.Unix() / int64(m.period.Seconds()))
+	periodTime := time.Unix(int64(period)*int64(m.period.Seconds()), 0)
+
+	return code.NewCode(token, m.amount, m.emojies, periodTime, periodTime.Add(m.period))
 }
 
 func (m *Generator) getToken() (string, error) {
@@ -30,7 +33,6 @@ func (m *Generator) getToken() (string, error) {
 
 	m.timing.last = m.timing.curr
 	m.timing.time = m.timing.time.Add(since)
-
 	period := uint64(m.timing.time.Unix() / int64(m.period.Seconds()))
 
 	// https://github.com/pquerna/code/blob/master/hotp/hotp.go#L95-L123
