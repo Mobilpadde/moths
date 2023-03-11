@@ -1,4 +1,4 @@
-package token
+package token_test
 
 import (
 	"errors"
@@ -6,20 +6,28 @@ import (
 	"testing"
 	"time"
 
+	"github.com/Mobilpadde/moths/v5/token"
 	"github.com/Mobilpadde/moths/v5/token/emojies"
 	"github.com/Mobilpadde/moths/v5/token/errs"
+	"github.com/Mobilpadde/moths/v5/token/option"
 )
 
 func TestNewGenerator(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
-	if _, err := NewGenerator(
-		OptionWithSecret(secret),
-		OptionWithPeriod(time.Second),
-		OptionWithAmount(amount),
-		OptionWithEmojies(emojies.CATS),
-	); err != nil {
+	g, err := token.NewGenerator(
+		option.OptionWithSecret(secret),
+		option.OptionWithPeriod(time.Second),
+		option.OptionWithAmount(amount),
+		option.OptionWithEmojies(emojies.CATS),
+	)
+	if err != nil {
+		t.Error("Expected to not return an error when creating new generator:", err)
+	}
+
+	err = g.Check()
+	if err != nil {
 		t.Error("Expected to not return an error when creating new generator:", err)
 	}
 }
@@ -27,15 +35,15 @@ func TestNewGenerator(t *testing.T) {
 func TestNewGeneratorNoSecret(t *testing.T) {
 	amount := 6
 
-	_, err := NewGenerator(
-		OptionWithSecret(""),
-		OptionWithPeriod(time.Second),
-		OptionWithAmount(amount),
-		OptionWithEmojies(emojies.CATS),
+	_, err := token.NewGenerator(
+		option.OptionWithSecret(""),
+		option.OptionWithPeriod(time.Second),
+		option.OptionWithAmount(amount),
+		option.OptionWithEmojies(emojies.CATS),
 	)
 
 	if !errors.Is(err, errs.ErrSecretLength) {
-		t.Error("Expected to return an error when creating new generator without a secret:", err)
+		t.Error("Expected to return an error when creating new generator without a secret")
 	}
 }
 
@@ -43,29 +51,33 @@ func TestNewGeneratorNoInterval(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
-	_, err := NewGenerator(
-		OptionWithSecret(secret),
-		OptionWithAmount(amount),
-		OptionWithEmojies(emojies.CATS),
+	g, err := token.NewGenerator(
+		option.OptionWithSecret(secret),
+		option.OptionWithAmount(amount),
+		option.OptionWithEmojies(emojies.CATS),
 	)
+	if err != nil {
+		t.Error("Expected to not return an error when creating new generator:", err)
+	}
 
+	err = g.Check()
 	if !errors.Is(err, errs.ErrPeriod1) {
-		t.Error("Expected to return an error when creating new generator without an interval:", err)
+		t.Error("Expected to return an error when creating new generator without an interval")
 	}
 }
 
 func TestNewGeneratorNoAmount(t *testing.T) {
 	secret := strings.Repeat("a", 32)
 
-	_, err := NewGenerator(
-		OptionWithSecret(secret),
-		OptionWithAmount(0),
-		OptionWithPeriod(time.Second),
-		OptionWithEmojies(emojies.CATS),
+	_, err := token.NewGenerator(
+		option.OptionWithSecret(secret),
+		option.OptionWithAmount(0),
+		option.OptionWithPeriod(time.Second),
+		option.OptionWithEmojies(emojies.CATS),
 	)
 
 	if !errors.Is(err, errs.ErrAmount1) {
-		t.Error("Expected to return an error when creating new generator without an amount:", err)
+		t.Error("Expected to return an error when creating new generator without an amount")
 	}
 }
 
@@ -73,14 +85,18 @@ func TestNewGeneratorNoEmojies(t *testing.T) {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
-	_, err := NewGenerator(
-		OptionWithSecret(secret),
-		OptionWithPeriod(time.Second),
-		OptionWithAmount(amount),
+	g, err := token.NewGenerator(
+		option.OptionWithSecret(secret),
+		option.OptionWithPeriod(time.Second),
+		option.OptionWithAmount(amount),
 	)
+	if err != nil {
+		t.Error("Expected to not return an error when creating new generator:", err)
+	}
 
+	err = g.Check()
 	if !errors.Is(err, errs.ErrEmojies1) {
-		t.Error("Expected to return an error when creating new generator without any emojies:", err)
+		t.Error("Expected to return an error when creating new generator without any emojies")
 	}
 }
 
@@ -93,12 +109,19 @@ func ExampleNewGenerator() {
 	amount := 6
 	secret := strings.Repeat("a", 32)
 
-	gen, _ := NewGenerator(
-		OptionWithSecret(secret),
-		OptionWithPeriod(time.Second),
-		OptionWithAmount(amount),
-		OptionWithEmojies(emojies.CATS),
+	gen, _ := token.NewGenerator(
+		option.OptionWithSecret(secret),
+		option.OptionWithPeriod(time.Second),
+		option.OptionWithAmount(amount),
+		option.OptionWithEmojies(emojies.CATS),
 	)
+
+	// It's good practice to use the run `g.Check()`
+	// method to check if everything is working.
+	// This is not requried though.
+	if err := gen.Check(); err != nil {
+		panic(err)
+	}
 
 	gen.Next()
 }
@@ -121,17 +144,47 @@ func ExampleNewGenerator() {
 // 😼 😼 😾 😾 😿 😹
 //
 // 😿 😽 😿 🙀 😼 😻
-func ExampleNewGenerator_withTime() {
-	amount := 6
+func ExampleNewGenerator_with_time() {
 	secret := strings.Repeat("a", 32)
 
-	gen, _ := NewGenerator(
-		OptionWithSecret(secret),
-		OptionWithPeriod(time.Second),
-		OptionWithAmount(amount),
-		OptionWithEmojies(emojies.CATS),
-		OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
+	gen, _ := token.NewGenerator(
+		option.OptionWithSecret(secret),
+		option.OptionWithPeriod(time.Second),
+		option.OptionWithAmount(6),
+		option.OptionWithEmojies(emojies.CATS),
+		option.OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
 	)
 
 	gen.Next()
+}
+
+// Instantiate a new generator with
+// a secret, amount, and emojies.
+//
+// We omit the period option and
+// set it later.
+//
+// This can be done with the other
+// options as well.
+func ExampleNewGenerator_set_period() {
+	secret := strings.Repeat("a", 32)
+
+	gen, _ := token.NewGenerator(
+		option.OptionWithSecret(secret),
+		option.OptionWithAmount(6),
+		option.OptionWithEmojies(emojies.CATS),
+	)
+
+	// If we run `gen.Check()` here,
+	// it'll return an error, because
+	// the period is not set.
+	gen.Check() // not nil
+
+	// set the period to 1 second
+	gen.SetPeriod(time.Second)
+
+	// If we run `gen.Check()` again,
+	// everything works, as expected
+	// because the period is now set.
+	gen.Check() // nil
 }
