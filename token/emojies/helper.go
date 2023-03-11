@@ -11,7 +11,7 @@ func ToEmojies(emojies []string) Emojies {
 		current := emojies[i]
 		for j := 0; j < len(current); {
 			r, width := utf8.DecodeRuneInString(current[j:])
-			em = append(em, r)
+			em = append(em, Emoji(r))
 
 			j += width
 		}

@@ -51,7 +51,7 @@ loop:
 			currentIndex := int(randomBuffer[i]) & mask
 
 			if currentIndex < emojiAmount {
-				if _, err := code.WriteRune(em[currentIndex]); err != nil {
+				if _, err := code.WriteRune(rune(em[currentIndex])); err != nil {
 					return emojies.EMPTY, err
 				} else if code.Len() == size {
 					break loop

@@ -2,7 +2,7 @@ package emojies
 
 import "strings"
 
-type Emojies []rune
+type Emojies []Emoji
 
 func (emojies Emojies) String() string {
 	return string(emojies)
