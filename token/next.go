@@ -11,33 +11,33 @@ import (
 	"github.com/Mobilpadde/moths/v5/token/code"
 )
 
-func (m *Generator) Next() (code.Code, error) {
-	token, err := m.getToken()
+func (g *Generator) Next() (code.Code, error) {
+	token, err := g.getToken()
 	if err != nil {
 		return code.Code{}, err
 	}
 
-	truncated := uint64(m.timing.time.Unix() / int64(m.period.Seconds()))
-	period := time.Unix(int64(truncated)*int64(m.period.Seconds()), 0)
+	truncated := uint64(g.timing.time.Unix() / int64(g.period.Seconds()))
+	period := time.Unix(int64(truncated)*int64(g.period.Seconds()), 0)
 
-	return code.NewCode(token, m.amount, m.emojies, period, period.Add(m.period))
+	return code.NewCode(token, g.amount, g.emojies, period, period.Add(g.period))
 }
 
-func (m *Generator) getToken() (string, error) {
-	m.timing.curr = time.Now().UTC()
+func (g *Generator) getToken() (string, error) {
+	g.timing.curr = time.Now().UTC()
 
-	since := m.timing.curr.Sub(m.timing.last)
-	if since < m.period {
-		return m.lastToken, nil
+	since := g.timing.curr.Sub(g.timing.last)
+	if since < g.period {
+		return g.lastToken, nil
 	}
 
-	m.timing.last = m.timing.curr
-	m.timing.time = m.timing.time.Add(since)
-	period := uint64(m.timing.time.Unix() / int64(m.period.Seconds()))
+	g.timing.last = g.timing.curr
+	g.timing.time = g.timing.time.Add(since)
+	period := uint64(g.timing.time.Unix() / int64(g.period.Seconds()))
 
 	// https://github.com/pquerna/code/blob/master/hotp/hotp.go#L95-L123
 	buf := make([]byte, 8)
-	h := hmac.New(sha1.New, m.secret)
+	h := hmac.New(sha1.New, g.secret)
 	binary.BigEndian.PutUint64(buf, period)
 
 	h.Write(buf)
@@ -51,10 +51,10 @@ func (m *Generator) getToken() (string, error) {
 		((int(sum[offset+2] & 0xff)) << 8) |
 		(int(sum[offset+3]) & 0xff))
 
-	f := fmt.Sprintf("%%0%dd", m.amount)
-	mod := int32(value % int64(math.Pow10(m.amount)))
+	f := fmt.Sprintf("%%0%dd", g.amount)
+	mod := int32(value % int64(math.Pow10(g.amount)))
 
 	token := fmt.Sprintf(f, mod)
-	m.lastToken = token
+	g.lastToken = token
 	return token, nil
 }

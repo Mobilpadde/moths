@@ -6,17 +6,17 @@ import (
 	"github.com/Mobilpadde/moths/v5/token/code"
 )
 
-func (m *Generator) Validate(moth string) bool {
-	if len(moth)/code.EmojiBytes != m.amount {
+func (g *Generator) Validate(moth string) bool {
+	if len(moth)/code.EmojiBytes != g.amount {
 		return false
 	}
 
-	token, err := m.getToken()
+	token, err := g.getToken()
 	if err != nil {
 		return false
 	}
 
-	same, err := code.NewCode(token, m.amount, m.emojies, time.Time{}, time.Time{})
+	same, err := code.NewCode(token, g.amount, g.emojies, time.Time{}, time.Time{})
 	if err != nil {
 		return false
 	}
@@ -29,13 +29,13 @@ func (m *Generator) Validate(moth string) bool {
 // to your users
 //
 // Deprecated: Insecure. Use `Validate` instead.
-func (m *Generator) ValidateToken(oldToken string) bool {
-	token, err := m.getToken()
+func (g *Generator) ValidateToken(oldToken string) bool {
+	token, err := g.getToken()
 	if err != nil {
 		return false
 	}
 
-	same, err := code.NewCode(token, m.amount, m.emojies, time.Time{}, time.Time{})
+	same, err := code.NewCode(token, g.amount, g.emojies, time.Time{}, time.Time{})
 	if err != nil {
 		return false
 	}

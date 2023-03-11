@@ -7,19 +7,19 @@ import (
 // NewGenerator creates a new token generator
 // with the given [Option]s.
 func NewGenerator(opts ...Option) (*Generator, error) {
-	m := &Generator{
+	g := &Generator{
 		amount: 6, // Defaults to `6` as most other TOTP codes are this length
 	}
 
 	for _, opt := range opts {
-		if err := opt(m); err != nil {
+		if err := opt(g); err != nil {
 			return nil, err
 		}
 	}
 
 	now := time.Now().UTC()
-	m.timing.curr = now
-	m.timing.last = now.Add(-m.period)
+	g.timing.curr = now
+	g.timing.last = now.Add(-g.period)
 
-	return m, nil
+	return g, nil
 }
