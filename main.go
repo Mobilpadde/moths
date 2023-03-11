@@ -7,6 +7,7 @@ import (
 
 	"github.com/Mobilpadde/moths/v5/token"
 	"github.com/Mobilpadde/moths/v5/token/emojies"
+	"github.com/Mobilpadde/moths/v5/token/option"
 )
 
 func main() {
@@ -22,11 +23,11 @@ func main() {
 	var err error
 	var gen *token.Generator
 	if gen, err = token.NewGenerator(
-		token.OptionWithSecret(secret),
-		token.OptionWithPeriod(generationInterval),
-		token.OptionWithAmount(amount),
-		token.OptionWithEmojies(emojies.CATS),
-		token.OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
+		option.OptionWithSecret(secret),
+		option.OptionWithPeriod(generationInterval),
+		option.OptionWithAmount(amount),
+		option.OptionWithEmojies(emojies.CATS),
+		option.OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
 	); err != nil {
 		log.Fatalln(err)
 	}
