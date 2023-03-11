@@ -2,7 +2,6 @@ package token
 
 import (
 	"encoding/base64"
-	"log"
 	"time"
 
 	"github.com/Mobilpadde/moths/v5/token/checks"
@@ -21,7 +20,6 @@ func (g *Generator) SetSecret(secret string) error {
 	dst := make([]byte, base64.StdEncoding.EncodedLen(len(data)))
 	base64.StdEncoding.Encode(dst, data)
 
-	log.Println("secret:", string(dst))
 	g.secret = dst
 	return nil
 }
