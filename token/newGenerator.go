@@ -1,7 +1,10 @@
 package token
 
 import (
+	"math/rand"
 	"time"
+
+	"github.com/Mobilpadde/characters/letters"
 )
 
 // NewGenerator creates a new token generator
@@ -17,9 +20,26 @@ func NewGenerator(opts ...Option) (*Generator, error) {
 		}
 	}
 
+	if g.secret == nil {
+		// set a default secret since none has been specified
+		secret := randSecret(32)
+		g.SetSecret(secret)
+	}
+
 	now := time.Now().UTC()
 	g.timing.curr = now
 	g.timing.last = now.Add(-g.period)
 
 	return g, nil
+}
+
+func randSecret(n int) string {
+	chars := letters.All
+	charsLength := len(chars)
+
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = chars[rand.Intn(charsLength)]
+	}
+	return string(b)
 }
