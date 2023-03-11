@@ -17,10 +17,10 @@ func (m *Generator) Next() (code.Code, error) {
 		return code.Code{}, err
 	}
 
-	period := uint64(m.timing.time.Unix() / int64(m.period.Seconds()))
-	periodTime := time.Unix(int64(period)*int64(m.period.Seconds()), 0)
+	truncated := uint64(m.timing.time.Unix() / int64(m.period.Seconds()))
+	period := time.Unix(int64(truncated)*int64(m.period.Seconds()), 0)
 
-	return code.NewCode(token, m.amount, m.emojies, periodTime, periodTime.Add(m.period))
+	return code.NewCode(token, m.amount, m.emojies, period, period.Add(m.period))
 }
 
 func (m *Generator) getToken() (string, error) {
