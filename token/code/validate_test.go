@@ -1,9 +1,10 @@
-package code
+package code_test
 
 import (
 	"testing"
 	"time"
 
+	"github.com/Mobilpadde/moths/v5/token/code"
 	"github.com/Mobilpadde/moths/v5/token/emojies"
 )
 
@@ -12,7 +13,7 @@ func TestValidate(t *testing.T) {
 	token := "000000"
 	correct := "😸😼😹😺😸😻"
 
-	code, err := NewCode(token, amount, emojies.CATS, time.Time{}, time.Time{})
+	code, err := code.NewCode(token, amount, emojies.CATS, time.Time{}, time.Time{})
 	if err != nil {
 		t.Error("Expected to not return an error when creating new code:", err)
 	}
@@ -26,7 +27,7 @@ func TestValidateToken(t *testing.T) {
 	amount := 6
 	token := "000000"
 
-	code, err := NewCode(token, amount, emojies.CATS, time.Time{}, time.Time{})
+	code, err := code.NewCode(token, amount, emojies.CATS, time.Time{}, time.Time{})
 	if err != nil {
 		t.Error("Expected to not return an error when creating new code:", err)
 	}

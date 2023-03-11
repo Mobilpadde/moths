@@ -1,9 +1,10 @@
-package code
+package code_test
 
 import (
 	"testing"
 	"time"
 
+	"github.com/Mobilpadde/moths/v5/token/code"
 	"github.com/Mobilpadde/moths/v5/token/emojies"
 )
 
@@ -12,7 +13,7 @@ func TestNewCode(t *testing.T) {
 	token := "000000"
 	correct := "😸😼😹😺😸😻"
 
-	code, err := NewCode(token, amount, emojies.CATS, time.Time{}, time.Time{})
+	code, err := code.NewCode(token, amount, emojies.CATS, time.Time{}, time.Time{})
 	if err != nil {
 		t.Error("Expected to not return an error when creating new code:", err)
 	}
@@ -31,7 +32,7 @@ func TestCreatedAt(t *testing.T) {
 	token := "000000"
 	createdAt := time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)
 
-	code, err := NewCode(token, amount, emojies.CATS, createdAt, time.Time{})
+	code, err := code.NewCode(token, amount, emojies.CATS, createdAt, time.Time{})
 	if err != nil {
 		t.Error("Expected to not return an error when creating new code:", err)
 	}
@@ -46,7 +47,7 @@ func TestExpiresAt(t *testing.T) {
 	token := "000000"
 	expiresAt := time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)
 
-	code, err := NewCode(token, amount, emojies.CATS, time.Time{}, expiresAt)
+	code, err := code.NewCode(token, amount, emojies.CATS, time.Time{}, expiresAt)
 	if err != nil {
 		t.Error("Expected to not return an error when creating new code:", err)
 	}
