@@ -29,23 +29,22 @@ const (
 	typePeriod  = "%d"
 	typeTime    = "%d"
 
-	patternField = "%s%s%s"
-)
-
-var (
 	prefixSecret  = letterSecret + delimiter
 	prefixAmount  = letterAmount + delimiter
 	prefixEmojies = letterEmojies + delimiter
 	prefixPeriod  = letterPeriod + delimiter
 	prefixTime    = letterTime + delimiter
 
+	patternField   = "%s%s%s"
+	patternEncoded = "%s%s%s%s%s"
+)
+
+var (
 	patternSecret  = fmt.Sprintf(patternField, prefixSecret, typeSecret, seperator)
 	patternAmount  = fmt.Sprintf(patternField, prefixAmount, typeAmount, seperator)
 	patternEmojies = fmt.Sprintf(patternField, prefixEmojies, typeEmojies, seperator)
 	patternPeriod  = fmt.Sprintf(patternField, prefixPeriod, typePeriod, seperator)
 	patternTime    = fmt.Sprintf(patternField, prefixTime, typeTime, seperator)
-
-	patternEncoded = "%s%s%s%s%s"
 )
 
 // Encode generators fields as a
