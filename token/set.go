@@ -55,6 +55,7 @@ func (g *Generator) SetPeriod(period time.Duration) error {
 	}
 
 	g.period = period
+	g.syncTiming()
 	return nil
 }
 
@@ -69,5 +70,15 @@ func (g *Generator) SetTime(t time.Time) error {
 		g.timing.time = time.Now().UTC()
 	}
 
+	g.syncTiming()
 	return nil
+}
+
+// Since we're updating time-related
+// options, we need to synchronize
+// the current and last time.
+func (g *Generator) syncTiming() {
+	now := time.Now().UTC()
+	g.timing.curr = now
+	g.timing.last = now.Add(-g.period)
 }
