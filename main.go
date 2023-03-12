@@ -11,24 +11,42 @@ import (
 )
 
 func main() {
-	secret := os.Getenv("MOTHS_SECRET")
-	amount := 8
+	secret := os.Getenv("MOTHS_SECRET") // created as specified in the README: https://github.com/Mobilpadde/moths#how-
+	amount := 8                         // we want to generate a code with 8 emojies
 
 	validationInterval := time.Second * 3
 	generationInterval := time.Second * 4
 
-	generationTicker := time.NewTicker(generationInterval)
-	validationTicker := time.NewTicker(validationInterval)
-
-	var err error
-	var gen *token.Generator
-	if gen, err = token.NewGenerator(
+	// Instantiate a new generator
+	gen, err := token.NewGenerator(
 		option.OptionWithSecret(secret),
 		option.OptionWithPeriod(generationInterval),
 		option.OptionWithAmount(amount),
 		option.OptionWithEmojies(emojies.CATS),
 		option.OptionWithTime(time.Date(0, 0, 0, 0, 0, 0, 0, time.UTC)),
-	); err != nil {
+	)
+	if err != nil {
+		log.Fatalln(err)
+	}
+
+	// Check if everything is working
+	if err := gen.Check(); err != nil {
+		log.Fatalln(err)
+	}
+
+	// Exports the generator's options
+	s := gen.Export()
+
+	// Instantiate a second generator
+	gen2, _ := token.NewGenerator()
+
+	// Import the encoded options into the new generator
+	if err = gen2.Import(s); err != nil {
+		log.Println(err)
+	}
+
+	// Check if everything is still working
+	if err := gen2.Check(); err != nil {
 		log.Fatalln(err)
 	}
 
@@ -40,20 +58,26 @@ func main() {
 	)
 	log.Printf("Every code is %d emoji long", amount)
 
+	// Flow:
+	//
+	// 10 Validate a code after 3 seconds (validationInterval)
+	// 20 Try validating the code again after 3 more seconds (validationInterval)
+	// 30 Generate a new code
+	//
+	// 40 GOTO 10
 	for {
 		log.Println()
-		code, err := gen.Next()
+		code, err := gen2.Next()
 		if err != nil {
 			log.Fatalln(err)
 		}
 
 		log.Printf(`Your code is "%s" and code is %s`, code.SpacedString(), code.Token())
-		<-validationTicker.C
+		<-time.NewTicker(validationInterval).C
 
-		log.Printf("Is this still valid after %s? %t", validationInterval, gen.Validate(code.String()))
-		<-validationTicker.C
+		log.Printf("Is this still valid after %s? %t", validationInterval, gen2.Validate(code.String()))
+		<-time.NewTicker(validationInterval).C
 
-		log.Printf("Is this still valid after %s? %t", validationInterval*2, gen.Validate(code.String()))
-		<-generationTicker.C
+		log.Printf("Is this still valid after %s? %t", validationInterval*2, gen2.Validate(code.String()))
 	}
 }
