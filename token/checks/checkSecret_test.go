@@ -4,7 +4,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/Mobilpadde/moths/v5/token/checks"
+	"github.com/Mobilpadde/moths/v6/token/checks"
 )
 
 func TestCheckSecret(t *testing.T) {

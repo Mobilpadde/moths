@@ -1,4 +1,4 @@
-module github.com/Mobilpadde/moths/v5
+module github.com/Mobilpadde/moths/v6
 
 go 1.20
 

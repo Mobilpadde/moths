@@ -1,7 +1,7 @@
 package checks
 
 import (
-	"github.com/Mobilpadde/moths/v5/token/errs"
+	"github.com/Mobilpadde/moths/v6/token/errs"
 )
 
 // CheckAmount is used to check

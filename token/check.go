@@ -1,6 +1,8 @@
 package token
 
-import "github.com/Mobilpadde/moths/v5/token/checks"
+import (
+	"github.com/Mobilpadde/moths/v6/token/checks"
+)
 
 // Check is checking if everything
 // is working

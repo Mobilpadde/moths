@@ -1,8 +1,8 @@
 package option
 
 import (
-	"github.com/Mobilpadde/moths/v5/token"
-	"github.com/Mobilpadde/moths/v5/token/emojies"
+	"github.com/Mobilpadde/moths/v6/token"
+	"github.com/Mobilpadde/moths/v6/token/emojies"
 )
 
 // OptionWithEmojies is used to specify

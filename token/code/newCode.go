@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Mobilpadde/moths/v5/token/emojies"
+	"github.com/Mobilpadde/moths/v6/token/emojies"
 )
 
 const EmojiBytes = 4

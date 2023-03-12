@@ -1,6 +1,6 @@
 package option
 
-import "github.com/Mobilpadde/moths/v5/token"
+import "github.com/Mobilpadde/moths/v6/token"
 
 // OptionWithSecret is used to specify
 // the secret to generate codes from.

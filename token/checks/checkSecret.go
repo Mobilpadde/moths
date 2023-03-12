@@ -1,6 +1,6 @@
 package checks
 
-import "github.com/Mobilpadde/moths/v5/token/errs"
+import "github.com/Mobilpadde/moths/v6/token/errs"
 
 // CheckSecret is used to check
 // if the provided secret is "strong" enough.

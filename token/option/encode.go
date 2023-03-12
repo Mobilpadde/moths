@@ -1,7 +1,7 @@
 package option
 
 import (
-	"github.com/Mobilpadde/moths/v5/token"
+	"github.com/Mobilpadde/moths/v6/token"
 )
 
 // OptionFromEncoded is used as

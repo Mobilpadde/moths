@@ -3,7 +3,7 @@ package token
 import (
 	"time"
 
-	"github.com/Mobilpadde/moths/v5/token/emojies"
+	"github.com/Mobilpadde/moths/v6/token/emojies"
 )
 
 type Generator struct {

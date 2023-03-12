@@ -4,8 +4,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Mobilpadde/moths/v5/token/code"
-	"github.com/Mobilpadde/moths/v5/token/emojies"
+	"github.com/Mobilpadde/moths/v6/token/code"
+	"github.com/Mobilpadde/moths/v6/token/emojies"
 )
 
 func TestNewCode(t *testing.T) {

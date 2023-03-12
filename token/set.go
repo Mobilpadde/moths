@@ -4,8 +4,8 @@ import (
 	"encoding/base64"
 	"time"
 
-	"github.com/Mobilpadde/moths/v5/token/checks"
-	"github.com/Mobilpadde/moths/v5/token/emojies"
+	"github.com/Mobilpadde/moths/v6/token/checks"
+	"github.com/Mobilpadde/moths/v6/token/emojies"
 )
 
 // SetSecret is used to specify

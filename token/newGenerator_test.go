@@ -6,10 +6,10 @@ import (
 	"testing"
 	"time"
 
-	"github.com/Mobilpadde/moths/v5/token"
-	"github.com/Mobilpadde/moths/v5/token/emojies"
-	"github.com/Mobilpadde/moths/v5/token/errs"
-	"github.com/Mobilpadde/moths/v5/token/option"
+	"github.com/Mobilpadde/moths/v6/token"
+	"github.com/Mobilpadde/moths/v6/token/emojies"
+	"github.com/Mobilpadde/moths/v6/token/errs"
+	"github.com/Mobilpadde/moths/v6/token/option"
 )
 
 func TestNewGenerator(t *testing.T) {

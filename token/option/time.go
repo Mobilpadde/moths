@@ -3,7 +3,7 @@ package option
 import (
 	"time"
 
-	"github.com/Mobilpadde/moths/v5/token"
+	"github.com/Mobilpadde/moths/v6/token"
 )
 
 // OptionWithTime is used to specify
