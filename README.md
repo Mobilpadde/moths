@@ -3,6 +3,7 @@
 > e**mo**jicon au**th**entication**s**
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/Mobilpadde/moths/v6.svg)](https://pkg.go.dev/github.com/Mobilpadde/moths/v6)
+[![codecov](https://codecov.io/gh/Mobilpadde/moths/branch/main/graph/badge.svg?token=VpeLKuFdDx)](https://codecov.io/gh/Mobilpadde/moths)
 
 ## what (is this 💩)
 
