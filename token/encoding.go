@@ -92,7 +92,7 @@ func (g *Generator) Import(encoded string) error {
 					return err
 				}
 
-				continue
+				break // break out of inner loop as we found the updatable field
 			}
 		}
 	}
